@@ -9,16 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body { background-color: #fff; color: #333; }
-    a { text-decoration: none; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
+    body { background:#fff; color:#333; line-height:1.6; }
+    a { text-decoration:none; }
 
     /* Botões globais */
     a, button {
@@ -37,7 +30,10 @@
       transform: translateY(-3px);
     }
 
-    /* Hero Section */
+    /* Seções públicas */
+    section { padding:60px 20px; }
+    .container { max-width:1000px; margin:0 auto; }
+
     .hero {
       background-color: #800000;
       background-image: url('hero-image.png');
@@ -52,171 +48,86 @@
       color: #FFD700;
       padding: 0 20px;
     }
-    .hero h1 { font-size: 3rem; margin-bottom: 20px; }
-    .hero p { font-size: 1.5rem; margin-bottom: 30px; }
+    .hero h1 { font-size:3rem; margin-bottom:20px; }
+    .hero p { font-size:1.5rem; margin-bottom:30px; }
 
     /* Projeto Educacional */
-    .projeto-educacional {
-      padding: 80px 20px;
-      text-align: center;
-      background-color: #fff;
-    }
-    .projeto-educacional h2 {
-      font-size: 2.5rem;
-      margin-bottom: 50px;
-      color: #800000;
-    }
-    .cards {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-    .card {
-      background-color: #800000;
-      color: #FFD700;
-      padding: 30px 20px;
-      border-radius: 12px;
-      width: 220px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
-    }
-    .card:hover { transform: translateY(-5px); }
-    .card .icon { font-size: 2.5rem; margin-bottom: 15px; }
-    .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-    .card p { font-size: 1rem; }
+    .projeto-educacional h2 { font-size:2.5rem; margin-bottom:50px; color:#800000; text-align:center; }
+    .cards { display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; }
+    .card { background-color:#800000; color:#FFD700; padding:30px 20px; border-radius:12px; width:220px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition:0.3s; text-align:center; }
+    .card:hover { transform:translateY(-5px); }
+    .card .icon { font-size:2.5rem; margin-bottom:15px; }
 
-    /* Estrutura Futura da Escola Digital */
-    .futuro-digital {
-      background-color: #f9f9f9;
-      padding: 80px 20px;
-    }
-    .futuro-digital .container {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-    .futuro-digital .col { flex: 1 1 400px; }
-    .futuro-digital .col.imagem img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .futuro-digital .col.texto h2 { font-size: 2rem; margin-bottom: 20px; color: #800000; }
-    .futuro-digital .col.texto p { font-size: 1.2rem; margin-bottom: 20px; }
+    /* Futuro Digital */
+    .futuro-digital .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
+    .futuro-digital .col { flex:1 1 400px; }
+    .futuro-digital .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+    .futuro-digital .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
+    .futuro-digital .col p { font-size:1.2rem; margin-bottom:20px; }
 
     /* Sobre a Fundadora */
-    .sobre-fundadora {
-      background-color: #fff;
-      padding: 80px 20px;
-    }
-    .sobre-fundadora .container {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-    .sobre-fundadora .col { flex: 1 1 400px; }
-    .sobre-fundadora .col.imagem img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .sobre-fundadora .col.texto h2 { font-size: 2rem; margin-bottom: 20px; color: #800000; }
-    .sobre-fundadora .col.texto p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
+    .sobre-fundadora .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
+    .sobre-fundadora .col { flex:1 1 400px; }
+    .sobre-fundadora .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+    .sobre-fundadora .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
+    .sobre-fundadora .col p { font-size:1.2rem; margin-bottom:20px; }
 
     /* Newsletter */
-    .newsletter {
-      background-color: #800000;
-      color: #FFD700;
-      text-align: center;
-      padding: 60px 20px;
-    }
-    .newsletter h2 { font-size: 2rem; margin-bottom: 15px; }
-    .newsletter p { font-size: 1.2rem; margin-bottom: 30px; }
-    .newsletter form {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .newsletter input[type="email"] {
-      padding: 12px 15px;
-      border-radius: 8px;
-      border: none;
-      width: 250px;
-      max-width: 100%;
-    }
+    .newsletter { background-color:#800000; color:#FFD700; text-align:center; padding:60px 20px; }
+    .newsletter h2 { font-size:2rem; margin-bottom:15px; }
+    .newsletter p { font-size:1.2rem; margin-bottom:30px; }
+    .newsletter form { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
+    .newsletter input[type="email"] { padding:12px 15px; border-radius:8px; border:none; width:250px; max-width:100%; }
 
     /* Rodapé */
-    .rodape {
-      background-color: #f9f9f9;
-      color: #800000;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-    }
-    .rodape .social {
-      margin-top: 8px;
-      font-size: 0.9rem;
-    }
-    .rodape .social a {
-      color: #800000;
-      text-decoration: none;
-      margin: 0 5px;
-      transition: 0.3s;
-    }
-    .rodape .social a:hover { color: #e6c200; }
+    .rodape { background-color:#f9f9f9; color:#800000; text-align:center; padding:20px; font-size:0.9rem; }
+    .rodape .social { margin-top:8px; font-size:0.9rem; }
+    .rodape .social a { color:#800000; margin:0 5px; transition:0.3s; }
+    .rodape .social a:hover { color:#e6c200; }
 
-    /* Fade-in seções */
-    section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    section.aparece { opacity: 1; transform: translateY(0); }
+    /* Protótipo Plataforma Interna */
+    .plataforma { background:#f5f5f5; }
+    .plataforma h2 { margin-bottom:30px; text-align:center; }
+    .mural { display:flex; flex-direction:column; gap:20px; margin-bottom:40px; }
+    .postagem { border:1px solid #800000; border-radius:10px; padding:15px; background:#FFD700; }
+    .missoes { display:flex; flex-wrap:wrap; gap:15px; margin-bottom:30px; justify-content:center; }
+    .missao { background:#800000; color:#FFD700; padding:15px; border-radius:10px; flex:1 1 180px; text-align:center; cursor:pointer; transition:0.3s; }
+    .missao:hover { transform:translateY(-3px); }
+    .ranking { display:flex; flex-direction:column; gap:10px; max-width:500px; margin:0 auto; }
+    .aluno { padding:10px; border-radius:8px; background:#f9f9f9; display:flex; justify-content:space-between; }
+    .aluno.destaque { background:#FFD700; font-weight:bold; }
+    .aluno.superacao { background:#e6c200; font-weight:bold; }
 
     /* Responsivo */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1.2rem; }
-      .cards { flex-direction: column; align-items: center; }
-      .card { width: 80%; }
+    @media(max-width:768px){
+      .cards { flex-direction:column; align-items:center; }
       .futuro-digital .container,
-      .sobre-fundadora .container { flex-direction: column; }
-      .futuro-digital .col.texto h2,
-      .sobre-fundadora .col.texto h2 { font-size: 1.7rem; }
-      .futuro-digital .col.texto p,
-      .sobre-fundadora .col.texto p,
-      .newsletter p { font-size: 1rem; }
+      .sobre-fundadora .container { flex-direction:column; }
+      .missoes { flex-direction:column; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero Section -->
+  <!-- Página pública -->
   <section class="hero">
     <h1>Aprender, criar e se conectar com a educação digital</h1>
     <p>Escola digital com raízes na comunidade e metodologia inovadora</p>
     <a href="#newsletter">Fique por dentro do lançamento</a>
   </section>
 
-  <!-- Projeto Educacional -->
-  <section class="projeto-educacional">
+  <section class="projeto-educacional container">
     <h2>Nosso Projeto Educacional</h2>
     <div class="cards">
       <div class="card">
         <div class="icon">💻</div>
         <h3>Tecnologia</h3>
-        <p>Recursos digitais e IA para um aprendizado inovador.</p>
+        <p>Recursos digitais e IA para aprendizado inovador.</p>
       </div>
       <div class="card">
         <div class="icon">🎨</div>
         <h3>Arte</h3>
-        <p>Desenvolvimento criativo através das linguagens artísticas.</p>
+        <p>Desenvolvimento criativo com linguagens artísticas.</p>
       </div>
       <div class="card">
         <div class="icon">🤝</div>
@@ -231,45 +142,58 @@
     </div>
   </section>
 
-  <!-- Estrutura Futura da Escola Digital -->
-  <section class="futuro-digital">
-    <div class="container">
-      <div class="col imagem">
-        <img src="plataforma-mockup.png" alt="Mockup da plataforma" />
-      </div>
-      <div class="col texto">
-        <h2>Nosso Futuro Digital</h2>
-        <p>Um espaço inovador, interativo e conectado com a comunidade, preparado para transformar a aprendizagem e integrar tecnologia e educação local.</p>
-        <a href="#newsletter">Receba novidades</a>
-      </div>
+  <section class="futuro-digital container">
+    <div class="col">
+      <img src="plataforma-mockup.png" alt="Mockup da plataforma">
+    </div>
+    <div class="col">
+      <h2>Nosso Futuro Digital</h2>
+      <p>Um espaço inovador, interativo e conectado com a comunidade, preparado para transformar a aprendizagem e integrar tecnologia e educação local.</p>
+      <a href="#newsletter">Receba novidades</a>
     </div>
   </section>
 
-  <!-- Sobre a Fundadora -->
-  <section class="sobre-fundadora">
-    <div class="container">
-      <div class="col imagem">
-        <img src="fundadora.png" alt="Foto da fundadora" />
-      </div>
-      <div class="col texto">
-        <h2>Sobre a Fundadora</h2>
-        <p>Geizy Macedo é educadora e líder do Instituto Digital, com experiência em metodologias inovadoras e comprometimento com a comunidade rural. Sua missão é transformar o ensino, conectando tecnologia, arte e cidadania de forma humanizada e próxima das pessoas.</p>
-        <p>Com uma visão inspiradora, ela conduz a escola digital com paixão, valorizando a identidade local e promovendo oportunidades de aprendizado para todos.</p>
-        <a href="#newsletter">Fique por dentro</a>
-      </div>
+  <section class="sobre-fundadora container">
+    <div class="col">
+      <img src="fundadora .png" alt="Foto da fundadora">
+    </div>
+    <div class="col">
+      <h2>Sobre a Fundadora</h2>
+      <p>Geizy Macedo é educadora e líder do Instituto Digital, com experiência em metodologias inovadoras e comprometimento com a comunidade rural.</p>
+      <p>Transforma o ensino conectando tecnologia, arte e cidadania de forma humanizada e próxima das pessoas.</p>
+      <a href="#newsletter">Fique por dentro</a>
     </div>
   </section>
 
-  <!-- Newsletter / Fique por dentro -->
   <section class="newsletter" id="newsletter">
     <div class="container">
       <h2>Fique por dentro das novidades</h2>
       <p>Receba informações sobre o lançamento da plataforma e novos cursos.</p>
       <form>
-        <input type="email" placeholder="Seu e-mail" required />
+        <input type="email" placeholder="Seu e-mail" required>
         <button type="submit">Inscrever-se</button>
       </form>
     </div>
+  </section>
+
+  <!-- Protótipo funcional da plataforma interna -->
+  <section class="plataforma container">
+    <h2>🖥️ Protótipo Plataforma Interna</h2>
+
+    <h3>Mural Digital</h3>
+    <div class="mural" id="mural"></div>
+
+    <h3>Missões Semanais</h3>
+    <div class="missoes" id="missoes">
+      <div class="missao" data-pontos="10">🧠 Conhecimento</div>
+      <div class="missao" data-pontos="15">🎨 Criativo</div>
+      <div class="missao" data-pontos="10">📖 Leitura</div>
+      <div class="missao" data-pontos="5">🌱 Cidadania</div>
+      <div class="missao" data-pontos="20">📸 Prática</div>
+    </div>
+
+    <h3>Ranking de Alunos</h3>
+    <div class="ranking" id="ranking"></div>
   </section>
 
   <!-- Rodapé -->
@@ -282,17 +206,55 @@
     </div>
   </footer>
 
-  <!-- Fade-in script -->
+  <!-- Script do protótipo -->
   <script>
-    const secoes = document.querySelectorAll('section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('aparece');
-        }
+    const alunos = [
+      { nome:"Ana", pontos:50 },
+      { nome:"Bruno", pontos:40 },
+      { nome:"Carla", pontos:30 },
+      { nome:"Daniel", pontos:20 },
+      { nome:"Eva", pontos:10 }
+    ];
+
+    const muralData = [
+      { titulo:"Comunicado da Escola", conteudo:"Aula de artes nesta quinta-feira será ao ar livre." },
+      { titulo:"Projeto Cultural", conteudo:"Exposição de desenhos dos alunos da turma 4º ano." },
+      { titulo:"Evento", conteudo:"Feira de Ciências será na próxima semana." }
+    ];
+
+    const mural = document.getElementById("mural");
+    muralData.forEach(post => {
+      const div = document.createElement("div");
+      div.classList.add("postagem");
+      div.innerHTML = `<h3>${post.titulo}</h3><p>${post.conteudo}</p>`;
+      mural.appendChild(div);
+    });
+
+    const rankingEl = document.getElementById("ranking");
+    function renderRanking(){
+      rankingEl.innerHTML = "";
+      alunos.sort((a,b)=>b.pontos-a.pontos);
+      alunos.forEach((aluno,index)=>{
+        const div = document.createElement("div");
+        div.classList.add("aluno");
+        if(index===0) div.classList.add("destaque");
+        if(aluno.pontos<=10) div.classList.add("superacao");
+        div.innerHTML = `<span>${aluno.nome}</span><span>${aluno.pontos} pts</span>`;
+        rankingEl.appendChild(div);
       });
-    }, { threshold: 0.2 });
-    secoes.forEach(secao => observer.observe(secao));
+    }
+    renderRanking();
+
+    const missoes = document.querySelectorAll(".missao");
+    missoes.forEach(missao=>{
+      missao.addEventListener("click",()=>{
+        const pontos = parseInt(missao.dataset.pontos);
+        const aluno = alunos[Math.floor(Math.random()*alunos.length)];
+        aluno.pontos += pontos;
+        alert(`${aluno.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
+        renderRanking();
+      });
+    });
   </script>
 
 </body>
