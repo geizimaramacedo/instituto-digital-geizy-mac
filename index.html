@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+
+  <div class="container" id="login-area">
     <h1>Instituto Digital Geizy Macedo</h1>
     <p>Plataforma educacional oficial</p>
 
@@ -17,6 +18,21 @@
       <button id="entrar">Entrar na Plataforma</button>
       <p id="mensagem"></p>
     </div>
+  </div>
+
+  <div class="container" id="area-aluno" style="display:none;">
+    <h1>Bem-vindo(a) ao Instituto Digital 👑</h1>
+    <p id="boasVindas"></p>
+
+    <div class="menu">
+      <button>Avaliações</button>
+      <button>Área Criativa</button>
+      <button>Mural da Escola</button>
+      <button>Desafios Semanais</button>
+    </div>
+
+    <br>
+    <button onclick="logout()">Sair</button>
   </div>
 
   <script src="script.js" defer></script>
