@@ -1,0 +1,47 @@
+body {
+  background-color: black;
+  color: gold;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.login-box {
+  display: inline-block;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.login-box input {
+  display: block;
+  width: 250px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid gold;
+  background-color: black;
+  color: gold;
+}
+
+.login-box button {
+  width: 270px;
+  padding: 10px;
+  background-color: gold;
+  color: black;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login-box button:hover {
+  background-color: #ffc700;
+}
+
+#mensagem {
+  margin-top: 10px;
+  font-weight: bold;
+}
