@@ -1,19 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Instituto Digital Geizy Mac</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instituto Digital Geizy Mac</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #333;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: #800000; /* Marsala como fallback */
+      background-image: url('hero-image.jpg'); /* Troque pelo caminho da sua imagem */
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #FFD700; /* Dourado */
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+
+    .hero a {
+      text-decoration: none;
+      color: #800000; /* texto do botão */
+      background-color: #FFD700; /* dourado */
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .hero a:hover {
+      background-color: #e6c200;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
-<body style="background:#6b1d3a; color:white; text-align:center; padding:50px; font-family:Arial;">
+<body>
 
-<h1>Instituto Digital Geizy Mac</h1>
-<p>Educação • Inovação • Transformação Digital</p>
-<p>📚 ✏️ 💻 🎓</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Aprender, criar e se conectar com a educação digital</h1>
+    <p>Escola digital com raízes na comunidade e metodologia inovadora</p>
+    <a href="#newsletter">Fique por dentro do lançamento</a>
+  </section>
 
-<a href="#" onclick="alert('Plataforma em breve!')" 
-style="background:#d4af37; color:#6b1d3a; padding:15px 30px; text-decoration:none; font-weight:bold; border-radius:6px;">
-Acessar Plataforma
-</a>
-
-</body>
-</html>
+</body
