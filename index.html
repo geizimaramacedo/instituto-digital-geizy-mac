@@ -18,6 +18,8 @@
       color: #333;
     }
 
+    a { text-decoration: none; }
+
     /* Hero Section */
     .hero {
       background-color: #800000; /* Marsala como fallback */
@@ -155,36 +157,132 @@
       background-color: #e6c200;
     }
 
+    /* Sobre a Fundadora */
+    .sobre-fundadora {
+      background-color: #fff;
+      padding: 80px 20px;
+    }
+
+    .sobre-fundadora .container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .sobre-fundadora .col {
+      flex: 1 1 400px;
+    }
+
+    .sobre-fundadora .col.imagem img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .sobre-fundadora .col.texto h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #800000; /* Marsala */
+    }
+
+    .sobre-fundadora .col.texto p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .sobre-fundadora .col.texto a {
+      text-decoration: none;
+      color: #800000;
+      background-color: #FFD700;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .sobre-fundadora .col.texto a:hover {
+      background-color: #e6c200;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background-color: #800000; /* Marsala */
+      color: #FFD700; /* Dourado */
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .newsletter h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .newsletter p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .newsletter form {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .newsletter input[type="email"] {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: none;
+      width: 250px;
+      max-width: 100%;
+    }
+
+    .newsletter button {
+      padding: 12px 25px;
+      border-radius: 8px;
+      border: none;
+      background-color: #FFD700; /* dourado */
+      color: #800000; /* texto marsala */
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .newsletter button:hover {
+      background-color: #e6c200;
+    }
+
+    /* Rodapé */
+    .rodape {
+      background-color: #f9f9f9;
+      color: #800000;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
     /* Responsivo */
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-      .hero p {
-        font-size: 1.2rem;
-      }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.2rem; }
 
-      .cards {
-        flex-direction: column;
-        align-items: center;
-      }
+      .cards { flex-direction: column; align-items: center; }
+      .card { width: 80%; }
 
-      .card {
-        width: 80%;
-      }
+      .futuro-digital .container,
+      .sobre-fundadora .container { flex-direction: column; }
 
-      .futuro-digital .container {
-        flex-direction: column;
-      }
+      .futuro-digital .col.texto h2,
+      .sobre-fundadora .col.texto h2 { font-size: 1.7rem; }
 
-      .futuro-digital .col.texto h2 {
-        font-size: 1.7rem;
-      }
-
-      .futuro-digital .col.texto p {
-        font-size: 1rem;
-      }
+      .futuro-digital .col.texto p,
+      .sobre-fundadora .col.texto p,
+      .newsletter p { font-size: 1rem; }
     }
+
   </style>
 </head>
 <body>
@@ -236,6 +334,38 @@
       </div>
     </div>
   </section>
+
+  <!-- Sobre a Fundadora -->
+  <section class="sobre-fundadora">
+    <div class="container">
+      <div class="col imagem">
+        <img src="fundadora.png" alt="Foto da fundadora" />
+      </div>
+      <div class="col texto">
+        <h2>Sobre a Fundadora</h2>
+        <p>Geizy Macedo é educadora e líder do Instituto Digital, com experiência em metodologias inovadoras e comprometimento com a comunidade rural. Sua missão é transformar o ensino, conectando tecnologia, arte e cidadania de forma humanizada e próxima das pessoas.</p>
+        <p>Com uma visão inspiradora, ela conduz a escola digital com paixão, valorizando a identidade local e promovendo oportunidades de aprendizado para todos.</p>
+        <a href="#newsletter">Fique por dentro</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter / Fique por dentro -->
+  <section class="newsletter" id="newsletter">
+    <div class="container">
+      <h2>Fique por dentro das novidades</h2>
+      <p>Receba informações sobre o lançamento da plataforma e novos cursos.</p>
+      <form>
+        <input type="email" placeholder="Seu e-mail" required />
+        <button type="submit">Inscrever-se</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
+    <p>© 2026 Instituto Digital Geizy Mac. Todos os direitos reservados.</p>
+  </footer>
 
 </body>
 </html>
