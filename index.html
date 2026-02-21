@@ -4,31 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Instituto Digital Geizy Mac</title>
-
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
 body { background:#fff; color:#333; line-height:1.6; }
 a { text-decoration:none; }
 
 /* Botões globais */
-a, button {
-  text-decoration: none;
-  color: #800000;
-  background-color: #FFD700;
-  padding: 15px 25px;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.4s ease;
-  display: inline-block;
-  cursor: pointer;
-}
-a:hover, button:hover {
-  background-color: #e6c200;
-  transform: translateY(-3px);
-}
+a, button { text-decoration: none; color: #800000; background-color: #FFD700; padding: 15px 25px; border-radius: 8px; font-weight: bold; transition: 0.4s ease; display: inline-block; cursor: pointer; }
+a:hover, button:hover { background-color: #e6c200; transform: translateY(-3px); }
 
 /* Seções públicas */
 section { padding:60px 20px; }
@@ -119,7 +103,15 @@ section { padding:60px 20px; }
 .ranking { display:flex; flex-direction:column; gap:10px; max-width:500px; margin:0 auto; }
 .aluno { padding:10px; border-radius:8px; background:#f9f9f9; display:flex; justify-content:space-between; transition:0.4s; }
 .aluno.destaque { background:#FFD700; font-weight:bold; }
-.aluno.superacao { background:#e6c200; font-weight:bold; }
+.aluno.superacao { background:#e6c200; font-weight:bold; cursor:pointer; }
+
+/* Destaques fixos */
+.aluno-destaque, .aluno-superacao { padding:15px; background:#FFD700; border-radius:12px; text-align:center; margin-bottom:20px; }
+.aluno-superacao { background:#e6c200; }
+
+/* Avaliações */
+.avaliacoes { background:#f9f9f9; padding:40px 20px; border-radius:12px; margin-top:40px; }
+.avaliacoes h2 { text-align:center; margin-bottom:30px; }
 
 /* Responsivo */
 @media(max-width:768px){
@@ -142,33 +134,15 @@ section { padding:60px 20px; }
 <section class="projeto-educacional container">
 <h2>Nosso Projeto Educacional</h2>
 <div class="cards">
-  <div class="card">
-    <div class="icon">💻</div>
-    <h3>Tecnologia</h3>
-    <p>Recursos digitais e IA para aprendizado inovador.</p>
-  </div>
-  <div class="card">
-    <div class="icon">🎨</div>
-    <h3>Arte</h3>
-    <p>Desenvolvimento criativo com linguagens artísticas.</p>
-  </div>
-  <div class="card">
-    <div class="icon">🤝</div>
-    <h3>Cidadania</h3>
-    <p>Valores e cultura local para formar cidadãos conscientes.</p>
-  </div>
-  <div class="card">
-    <div class="icon">📚</div>
-    <h3>Literatura</h3>
-    <p>Alfabetização e expressão para todas as idades.</p>
-  </div>
+  <div class="card"><div class="icon">💻</div><h3>Tecnologia</h3><p>Recursos digitais e IA para aprendizado inovador.</p></div>
+  <div class="card"><div class="icon">🎨</div><h3>Arte</h3><p>Desenvolvimento criativo com linguagens artísticas.</p></div>
+  <div class="card"><div class="icon">🤝</div><h3>Cidadania</h3><p>Valores e cultura local para formar cidadãos conscientes.</p></div>
+  <div class="card"><div class="icon">📚</div><h3>Literatura</h3><p>Alfabetização e expressão para todas as idades.</p></div>
 </div>
 </section>
 
 <section class="futuro-digital container">
-<div class="col">
-<img src="plataforma-mockup.png" alt="Mockup da plataforma">
-</div>
+<div class="col"><img src="plataforma-mockup.png" alt="Mockup da plataforma"></div>
 <div class="col">
 <h2>Nosso Futuro Digital</h2>
 <p>Um espaço inovador, interativo e conectado com a comunidade, preparado para transformar a aprendizagem e integrar tecnologia e educação local.</p>
@@ -177,9 +151,7 @@ section { padding:60px 20px; }
 </section>
 
 <section class="sobre-fundadora container">
-<div class="col">
-<img src="fundadora .png" alt="Foto da fundadora">
-</div>
+<div class="col"><img src="fundadora .png" alt="Foto da fundadora"></div>
 <div class="col">
 <h2>Sobre a Fundadora</h2>
 <p>Geizy Macedo é educadora e líder do Instituto Digital, com experiência em metodologias inovadoras e comprometimento com a comunidade rural.</p>
@@ -203,6 +175,22 @@ section { padding:60px 20px; }
 <section class="plataforma container">
 <h2>🖥️ Protótipo Plataforma Interna</h2>
 
+<h3>Cadastro de Alunos</h3>
+<form id="cadastroAluno">
+  <input type="text" placeholder="Nome" required>
+  <input type="email" placeholder="E-mail" required>
+  <button type="submit">Cadastrar</button>
+</form>
+
+<h3>🏆 Aluno Destaque</h3>
+<div id="alunoDestaque" class="aluno-destaque"></div>
+
+<h3>💛 Aluno Superação</h3>
+<div id="alunoSuperacao" class="aluno-superacao"></div>
+
+<h3>Ranking de Alunos</h3>
+<div class="ranking" id="ranking"></div>
+
 <h3>Mural Digital</h3>
 <div class="mural" id="mural"></div>
 
@@ -215,8 +203,10 @@ section { padding:60px 20px; }
   <div class="missao" data-pontos="20">📸 Prática</div>
 </div>
 
-<h3>Ranking de Alunos</h3>
-<div class="ranking" id="ranking"></div>
+<h3>📝 Avaliações Digitais</h3>
+<div class="avaliacoes container" id="avaliacaoArea"></div>
+<button onclick="iniciarAvaliacao()">Iniciar Avaliação</button>
+
 </section>
 
 <!-- Rodapé -->
@@ -232,11 +222,11 @@ section { padding:60px 20px; }
 <script>
 // Dados simulados
 const alunos = [
-  { nome:"Ana", pontos:50 },
-  { nome:"Bruno", pontos:40 },
-  { nome:"Carla", pontos:30 },
-  { nome:"Daniel", pontos:20 },
-  { nome:"Eva", pontos:10 }
+  { nome:"Ana", pontos:50, medalhas:1 },
+  { nome:"Bruno", pontos:40, medalhas:1 },
+  { nome:"Carla", pontos:30, medalhas:0 },
+  { nome:"Daniel", pontos:20, medalhas:0 },
+  { nome:"Eva", pontos:10, medalhas:0 }
 ];
 
 const muralData = [
@@ -268,7 +258,32 @@ function renderRanking(){
     rankingEl.appendChild(div);
   });
 }
-renderRanking();
+
+// Destaques fixos
+function atualizarDestaques(){
+  const destaque = alunos.reduce((a,b)=> a.pontos > b.pontos ? a : b);
+  document.getElementById("alunoDestaque").innerHTML = `
+    <strong>${destaque.nome}</strong> - ${destaque.pontos} pts
+    <div>🏅 Medalhas: ${destaque.medalhas || 0}</div>
+  `;
+  const superacao = alunos.reduce((a,b)=> a.pontos < b.pontos ? a : b);
+  document.getElementById("alunoSuperacao").innerHTML = `
+    <strong>${superacao.nome}</strong> - ${superacao.pontos} pts
+    <div>🏅 Medalhas: ${superacao.medalhas || 0}</div>
+  `;
+}
+
+// Cadastro de alunos
+document.getElementById("cadastroAluno").addEventListener("submit", function(e){
+  e.preventDefault();
+  const nome = this.querySelector('input[type="text"]').value;
+  const email = this.querySelector('input[type="email"]').value;
+  alunos.push({ nome, pontos:0, medalhas:0 });
+  renderRanking();
+  atualizarDestaques();
+  alert(`Aluno ${nome} cadastrado!`);
+  this.reset();
+});
 
 // Missões interativas com medalhas
 const missoes = document.querySelectorAll(".missao");
@@ -277,8 +292,8 @@ missoes.forEach(missao=>{
     const pontos = parseInt(missao.dataset.pontos);
     const aluno = alunos[Math.floor(Math.random()*alunos.length)];
     aluno.pontos += pontos;
+    aluno.medalhas = (aluno.medalhas || 0) + 1;
 
-    // Cria medalha visual
     const medalha = document.createElement("div");
     medalha.classList.add("medalha");
     medalha.textContent = "🏅";
@@ -287,8 +302,58 @@ missoes.forEach(missao=>{
 
     alert(`${aluno.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
     renderRanking();
+    atualizarDestaques();
   });
 });
+
+// Avaliações Digitais
+const avaliacoes = [
+  { titulo: "Prova de Conhecimento - 4º Ano", perguntas: [
+    { pergunta: "Qual é a capital de Minas Gerais?", resposta: "Belo Horizonte", pontos:10 },
+    { pergunta: "Qual cor resulta da mistura de vermelho e amarelo?", resposta: "Laranja", pontos:10 }
+  ]}
+];
+
+function iniciarAvaliacao(){
+  const area = document.getElementById("avaliacaoArea");
+  area.innerHTML = "";
+  const prova = avaliacoes[0];
+  const form = document.createElement("form");
+  form.innerHTML = `<h3>${prova.titulo}</h3>`;
+  prova.perguntas.forEach((q,i)=>{
+    form.innerHTML += `<label>${q.pergunta}</label><br>
+      <input type="text" name="resp${i}" required><br><br>`;
+  });
+  form.innerHTML += `<button type="submit">Enviar Respostas</button>`;
+  area.appendChild(form);
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    let pontos = 0;
+    prova.perguntas.forEach((q,i)=>{
+      const respostaAluno = form[`resp${i}`].value.trim().toLowerCase();
+      if(respostaAluno === q.resposta.toLowerCase()) pontos += q.pontos;
+    });
+
+    const aluno = alunos[Math.floor(Math.random()*alunos.length)];
+    aluno.pontos += pontos;
+    aluno.medalhas = (aluno.medalhas || 0) + 1;
+
+    alert(`Avaliação concluída! ${aluno.nome} ganhou ${pontos} pontos!`);
+    renderRanking();
+    atualizarDestaques();
+    area.innerHTML = "<p>Avaliação enviada!</p>";
+  });
+}
+
+// Bloqueio simulado durante avaliação
+window.onbeforeunload = function(){
+  return "A avaliação está em andamento. Tem certeza que quer sair?";
+}
+
+// Inicializa
+renderRanking();
+atualizarDestaques();
 </script>
 
 </body>
