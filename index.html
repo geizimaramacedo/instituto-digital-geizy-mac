@@ -1,261 +1,295 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instituto Digital Geizy Mac</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instituto Digital Geizy Mac</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-    body { background:#fff; color:#333; line-height:1.6; }
-    a { text-decoration:none; }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
+body { background:#fff; color:#333; line-height:1.6; }
+a { text-decoration:none; }
 
-    /* Botões globais */
-    a, button {
-      text-decoration: none;
-      color: #800000;
-      background-color: #FFD700;
-      padding: 15px 25px;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: 0.4s ease;
-      display: inline-block;
-      cursor: pointer;
-    }
-    a:hover, button:hover {
-      background-color: #e6c200;
-      transform: translateY(-3px);
-    }
+/* Botões globais */
+a, button {
+  text-decoration: none;
+  color: #800000;
+  background-color: #FFD700;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.4s ease;
+  display: inline-block;
+  cursor: pointer;
+}
+a:hover, button:hover {
+  background-color: #e6c200;
+  transform: translateY(-3px);
+}
 
-    /* Seções públicas */
-    section { padding:60px 20px; }
-    .container { max-width:1000px; margin:0 auto; }
+/* Seções públicas */
+section { padding:60px 20px; }
+.container { max-width:1000px; margin:0 auto; }
 
-    .hero {
-      background-color: #800000;
-      background-image: url('hero-image.png');
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #FFD700;
-      padding: 0 20px;
-    }
-    .hero h1 { font-size:3rem; margin-bottom:20px; }
-    .hero p { font-size:1.5rem; margin-bottom:30px; }
+.hero {
+  background-color: #800000;
+  background-image: url('hero-image.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #FFD700;
+  padding: 0 20px;
+}
+.hero h1 { font-size:3rem; margin-bottom:20px; }
+.hero p { font-size:1.5rem; margin-bottom:30px; }
 
-    /* Projeto Educacional */
-    .projeto-educacional h2 { font-size:2.5rem; margin-bottom:50px; color:#800000; text-align:center; }
-    .cards { display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; }
-    .card { background-color:#800000; color:#FFD700; padding:30px 20px; border-radius:12px; width:220px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition:0.3s; text-align:center; }
-    .card:hover { transform:translateY(-5px); }
-    .card .icon { font-size:2.5rem; margin-bottom:15px; }
+/* Projeto Educacional */
+.projeto-educacional h2 { font-size:2.5rem; margin-bottom:50px; color:#800000; text-align:center; }
+.cards { display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; }
+.card { background-color:#800000; color:#FFD700; padding:30px 20px; border-radius:12px; width:220px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition:0.3s; text-align:center; }
+.card:hover { transform:translateY(-5px); }
+.card .icon { font-size:2.5rem; margin-bottom:15px; }
 
-    /* Futuro Digital */
-    .futuro-digital .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
-    .futuro-digital .col { flex:1 1 400px; }
-    .futuro-digital .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
-    .futuro-digital .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
-    .futuro-digital .col p { font-size:1.2rem; margin-bottom:20px; }
+/* Futuro Digital */
+.futuro-digital .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
+.futuro-digital .col { flex:1 1 400px; }
+.futuro-digital .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+.futuro-digital .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
+.futuro-digital .col p { font-size:1.2rem; margin-bottom:20px; }
 
-    /* Sobre a Fundadora */
-    .sobre-fundadora .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
-    .sobre-fundadora .col { flex:1 1 400px; }
-    .sobre-fundadora .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
-    .sobre-fundadora .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
-    .sobre-fundadora .col p { font-size:1.2rem; margin-bottom:20px; }
+/* Sobre a Fundadora */
+.sobre-fundadora .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
+.sobre-fundadora .col { flex:1 1 400px; }
+.sobre-fundadora .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+.sobre-fundadora .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
+.sobre-fundadora .col p { font-size:1.2rem; margin-bottom:20px; }
 
-    /* Newsletter */
-    .newsletter { background-color:#800000; color:#FFD700; text-align:center; padding:60px 20px; }
-    .newsletter h2 { font-size:2rem; margin-bottom:15px; }
-    .newsletter p { font-size:1.2rem; margin-bottom:30px; }
-    .newsletter form { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
-    .newsletter input[type="email"] { padding:12px 15px; border-radius:8px; border:none; width:250px; max-width:100%; }
+/* Newsletter */
+.newsletter { background-color:#800000; color:#FFD700; text-align:center; padding:60px 20px; }
+.newsletter h2 { font-size:2rem; margin-bottom:15px; }
+.newsletter p { font-size:1.2rem; margin-bottom:30px; }
+.newsletter form { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
+.newsletter input[type="email"] { padding:12px 15px; border-radius:8px; border:none; width:250px; max-width:100%; }
 
-    /* Rodapé */
-    .rodape { background-color:#f9f9f9; color:#800000; text-align:center; padding:20px; font-size:0.9rem; }
-    .rodape .social { margin-top:8px; font-size:0.9rem; }
-    .rodape .social a { color:#800000; margin:0 5px; transition:0.3s; }
-    .rodape .social a:hover { color:#e6c200; }
+/* Rodapé */
+.rodape { background-color:#f9f9f9; color:#800000; text-align:center; padding:20px; font-size:0.9rem; }
+.rodape .social { margin-top:8px; font-size:0.9rem; }
+.rodape .social a { color:#800000; margin:0 5px; transition:0.3s; }
+.rodape .social a:hover { color:#e6c200; }
 
-    /* Protótipo Plataforma Interna */
-    .plataforma { background:#f5f5f5; }
-    .plataforma h2 { margin-bottom:30px; text-align:center; }
-    .mural { display:flex; flex-direction:column; gap:20px; margin-bottom:40px; }
-    .postagem { border:1px solid #800000; border-radius:10px; padding:15px; background:#FFD700; }
-    .missoes { display:flex; flex-wrap:wrap; gap:15px; margin-bottom:30px; justify-content:center; }
-    .missao { background:#800000; color:#FFD700; padding:15px; border-radius:10px; flex:1 1 180px; text-align:center; cursor:pointer; transition:0.3s; }
-    .missao:hover { transform:translateY(-3px); }
-    .ranking { display:flex; flex-direction:column; gap:10px; max-width:500px; margin:0 auto; }
-    .aluno { padding:10px; border-radius:8px; background:#f9f9f9; display:flex; justify-content:space-between; }
-    .aluno.destaque { background:#FFD700; font-weight:bold; }
-    .aluno.superacao { background:#e6c200; font-weight:bold; }
+/* Protótipo Plataforma Interna */
+.plataforma { background:#f5f5f5; }
+.plataforma h2 { margin-bottom:30px; text-align:center; }
+.mural { display:flex; flex-direction:column; gap:20px; margin-bottom:40px; }
+.postagem { border:1px solid #800000; border-radius:10px; padding:15px; background:#FFD700; }
+.missoes { display:flex; flex-wrap:wrap; gap:15px; margin-bottom:30px; justify-content:center; }
+.missao { background:#800000; color:#FFD700; padding:15px; border-radius:10px; flex:1 1 180px; text-align:center; cursor:pointer; transition:0.3s; position:relative; }
+.missao:hover { transform:translateY(-3px); }
 
-    /* Responsivo */
-    @media(max-width:768px){
-      .cards { flex-direction:column; align-items:center; }
-      .futuro-digital .container,
-      .sobre-fundadora .container { flex-direction:column; }
-      .missoes { flex-direction:column; }
-    }
-  </style>
+/* Medalhas */
+.missao .medalha {
+  position:absolute;
+  top:-10px;
+  right:-10px;
+  background:#FFD700;
+  color:#800000;
+  font-weight:bold;
+  border-radius:50%;
+  width:30px;
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation: pulse 0.6s ease;
+}
+@keyframes pulse {
+  0% { transform: scale(0.5); opacity:0; }
+  50% { transform: scale(1.2); opacity:1; }
+  100% { transform: scale(1); opacity:1; }
+}
+
+.ranking { display:flex; flex-direction:column; gap:10px; max-width:500px; margin:0 auto; }
+.aluno { padding:10px; border-radius:8px; background:#f9f9f9; display:flex; justify-content:space-between; transition:0.4s; }
+.aluno.destaque { background:#FFD700; font-weight:bold; }
+.aluno.superacao { background:#e6c200; font-weight:bold; }
+
+/* Responsivo */
+@media(max-width:768px){
+  .cards { flex-direction:column; align-items:center; }
+  .futuro-digital .container,
+  .sobre-fundadora .container { flex-direction:column; }
+  .missoes { flex-direction:column; }
+}
+</style>
 </head>
 <body>
 
-  <!-- Página pública -->
-  <section class="hero">
-    <h1>Aprender, criar e se conectar com a educação digital</h1>
-    <p>Escola digital com raízes na comunidade e metodologia inovadora</p>
-    <a href="#newsletter">Fique por dentro do lançamento</a>
-  </section>
+<!-- Página pública -->
+<section class="hero">
+<h1>Aprender, criar e se conectar com a educação digital</h1>
+<p>Escola digital com raízes na comunidade e metodologia inovadora</p>
+<a href="#newsletter">Fique por dentro do lançamento</a>
+</section>
 
-  <section class="projeto-educacional container">
-    <h2>Nosso Projeto Educacional</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">💻</div>
-        <h3>Tecnologia</h3>
-        <p>Recursos digitais e IA para aprendizado inovador.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🎨</div>
-        <h3>Arte</h3>
-        <p>Desenvolvimento criativo com linguagens artísticas.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🤝</div>
-        <h3>Cidadania</h3>
-        <p>Valores e cultura local para formar cidadãos conscientes.</p>
-      </div>
-      <div class="card">
-        <div class="icon">📚</div>
-        <h3>Literatura</h3>
-        <p>Alfabetização e expressão para todas as idades.</p>
-      </div>
-    </div>
-  </section>
+<section class="projeto-educacional container">
+<h2>Nosso Projeto Educacional</h2>
+<div class="cards">
+  <div class="card">
+    <div class="icon">💻</div>
+    <h3>Tecnologia</h3>
+    <p>Recursos digitais e IA para aprendizado inovador.</p>
+  </div>
+  <div class="card">
+    <div class="icon">🎨</div>
+    <h3>Arte</h3>
+    <p>Desenvolvimento criativo com linguagens artísticas.</p>
+  </div>
+  <div class="card">
+    <div class="icon">🤝</div>
+    <h3>Cidadania</h3>
+    <p>Valores e cultura local para formar cidadãos conscientes.</p>
+  </div>
+  <div class="card">
+    <div class="icon">📚</div>
+    <h3>Literatura</h3>
+    <p>Alfabetização e expressão para todas as idades.</p>
+  </div>
+</div>
+</section>
 
-  <section class="futuro-digital container">
-    <div class="col">
-      <img src="plataforma-mockup.png" alt="Mockup da plataforma">
-    </div>
-    <div class="col">
-      <h2>Nosso Futuro Digital</h2>
-      <p>Um espaço inovador, interativo e conectado com a comunidade, preparado para transformar a aprendizagem e integrar tecnologia e educação local.</p>
-      <a href="#newsletter">Receba novidades</a>
-    </div>
-  </section>
+<section class="futuro-digital container">
+<div class="col">
+<img src="plataforma-mockup.png" alt="Mockup da plataforma">
+</div>
+<div class="col">
+<h2>Nosso Futuro Digital</h2>
+<p>Um espaço inovador, interativo e conectado com a comunidade, preparado para transformar a aprendizagem e integrar tecnologia e educação local.</p>
+<a href="#newsletter">Receba novidades</a>
+</div>
+</section>
 
-  <section class="sobre-fundadora container">
-    <div class="col">
-      <img src="fundadora .png" alt="Foto da fundadora">
-    </div>
-    <div class="col">
-      <h2>Sobre a Fundadora</h2>
-      <p>Geizy Macedo é educadora e líder do Instituto Digital, com experiência em metodologias inovadoras e comprometimento com a comunidade rural.</p>
-      <p>Transforma o ensino conectando tecnologia, arte e cidadania de forma humanizada e próxima das pessoas.</p>
-      <a href="#newsletter">Fique por dentro</a>
-    </div>
-  </section>
+<section class="sobre-fundadora container">
+<div class="col">
+<img src="fundadora .png" alt="Foto da fundadora">
+</div>
+<div class="col">
+<h2>Sobre a Fundadora</h2>
+<p>Geizy Macedo é educadora e líder do Instituto Digital, com experiência em metodologias inovadoras e comprometimento com a comunidade rural.</p>
+<p>Transforma o ensino conectando tecnologia, arte e cidadania de forma humanizada e próxima das pessoas.</p>
+<a href="#newsletter">Fique por dentro</a>
+</div>
+</section>
 
-  <section class="newsletter" id="newsletter">
-    <div class="container">
-      <h2>Fique por dentro das novidades</h2>
-      <p>Receba informações sobre o lançamento da plataforma e novos cursos.</p>
-      <form>
-        <input type="email" placeholder="Seu e-mail" required>
-        <button type="submit">Inscrever-se</button>
-      </form>
-    </div>
-  </section>
+<section class="newsletter" id="newsletter">
+<div class="container">
+<h2>Fique por dentro das novidades</h2>
+<p>Receba informações sobre o lançamento da plataforma e novos cursos.</p>
+<form>
+  <input type="email" placeholder="Seu e-mail" required>
+  <button type="submit">Inscrever-se</button>
+</form>
+</div>
+</section>
 
-  <!-- Protótipo funcional da plataforma interna -->
-  <section class="plataforma container">
-    <h2>🖥️ Protótipo Plataforma Interna</h2>
+<!-- Protótipo funcional da plataforma interna -->
+<section class="plataforma container">
+<h2>🖥️ Protótipo Plataforma Interna</h2>
 
-    <h3>Mural Digital</h3>
-    <div class="mural" id="mural"></div>
+<h3>Mural Digital</h3>
+<div class="mural" id="mural"></div>
 
-    <h3>Missões Semanais</h3>
-    <div class="missoes" id="missoes">
-      <div class="missao" data-pontos="10">🧠 Conhecimento</div>
-      <div class="missao" data-pontos="15">🎨 Criativo</div>
-      <div class="missao" data-pontos="10">📖 Leitura</div>
-      <div class="missao" data-pontos="5">🌱 Cidadania</div>
-      <div class="missao" data-pontos="20">📸 Prática</div>
-    </div>
+<h3>Missões Semanais</h3>
+<div class="missoes" id="missoes">
+  <div class="missao" data-pontos="10">🧠 Conhecimento</div>
+  <div class="missao" data-pontos="15">🎨 Criativo</div>
+  <div class="missao" data-pontos="10">📖 Leitura</div>
+  <div class="missao" data-pontos="5">🌱 Cidadania</div>
+  <div class="missao" data-pontos="20">📸 Prática</div>
+</div>
 
-    <h3>Ranking de Alunos</h3>
-    <div class="ranking" id="ranking"></div>
-  </section>
+<h3>Ranking de Alunos</h3>
+<div class="ranking" id="ranking"></div>
+</section>
 
-  <!-- Rodapé -->
-  <footer class="rodape">
-    <p>© 2026 Instituto Digital Geizy Mac. Todos os direitos reservados.</p>
-    <div class="social">
-      <a href="https://www.instagram.com/seuperfil" target="_blank">Instagram</a> |
-      <a href="https://www.facebook.com/seuperfil" target="_blank">Facebook</a> |
-      <a href="https://www.linkedin.com/in/seuperfil" target="_blank">LinkedIn</a>
-    </div>
-  </footer>
+<!-- Rodapé -->
+<footer class="rodape">
+<p>© 2026 Instituto Digital Geizy Mac. Todos os direitos reservados.</p>
+<div class="social">
+<a href="https://www.instagram.com/seuperfil" target="_blank">Instagram</a> |
+<a href="https://www.facebook.com/seuperfil" target="_blank">Facebook</a> |
+<a href="https://www.linkedin.com/in/seuperfil" target="_blank">LinkedIn</a>
+</div>
+</footer>
 
-  <!-- Script do protótipo -->
-  <script>
-    const alunos = [
-      { nome:"Ana", pontos:50 },
-      { nome:"Bruno", pontos:40 },
-      { nome:"Carla", pontos:30 },
-      { nome:"Daniel", pontos:20 },
-      { nome:"Eva", pontos:10 }
-    ];
+<script>
+// Dados simulados
+const alunos = [
+  { nome:"Ana", pontos:50 },
+  { nome:"Bruno", pontos:40 },
+  { nome:"Carla", pontos:30 },
+  { nome:"Daniel", pontos:20 },
+  { nome:"Eva", pontos:10 }
+];
 
-    const muralData = [
-      { titulo:"Comunicado da Escola", conteudo:"Aula de artes nesta quinta-feira será ao ar livre." },
-      { titulo:"Projeto Cultural", conteudo:"Exposição de desenhos dos alunos da turma 4º ano." },
-      { titulo:"Evento", conteudo:"Feira de Ciências será na próxima semana." }
-    ];
+const muralData = [
+  { titulo:"Comunicado da Escola", conteudo:"Aula de artes nesta quinta-feira será ao ar livre." },
+  { titulo:"Projeto Cultural", conteudo:"Exposição de desenhos dos alunos da turma 4º ano." },
+  { titulo:"Evento", conteudo:"Feira de Ciências será na próxima semana." }
+];
 
-    const mural = document.getElementById("mural");
-    muralData.forEach(post => {
-      const div = document.createElement("div");
-      div.classList.add("postagem");
-      div.innerHTML = `<h3>${post.titulo}</h3><p>${post.conteudo}</p>`;
-      mural.appendChild(div);
-    });
+// Renderiza mural
+const mural = document.getElementById("mural");
+muralData.forEach(post => {
+  const div = document.createElement("div");
+  div.classList.add("postagem");
+  div.innerHTML = `<h3>${post.titulo}</h3><p>${post.conteudo}</p>`;
+  mural.appendChild(div);
+});
 
-    const rankingEl = document.getElementById("ranking");
-    function renderRanking(){
-      rankingEl.innerHTML = "";
-      alunos.sort((a,b)=>b.pontos-a.pontos);
-      alunos.forEach((aluno,index)=>{
-        const div = document.createElement("div");
-        div.classList.add("aluno");
-        if(index===0) div.classList.add("destaque");
-        if(aluno.pontos<=10) div.classList.add("superacao");
-        div.innerHTML = `<span>${aluno.nome}</span><span>${aluno.pontos} pts</span>`;
-        rankingEl.appendChild(div);
-      });
-    }
+// Renderiza ranking
+const rankingEl = document.getElementById("ranking");
+function renderRanking(){
+  rankingEl.innerHTML = "";
+  alunos.sort((a,b)=>b.pontos-a.pontos);
+  alunos.forEach((aluno,index)=>{
+    const div = document.createElement("div");
+    div.classList.add("aluno");
+    if(index===0) div.classList.add("destaque");
+    if(aluno.pontos<=10) div.classList.add("superacao");
+    div.innerHTML = `<span>${aluno.nome}</span><span>${aluno.pontos} pts</span>`;
+    rankingEl.appendChild(div);
+  });
+}
+renderRanking();
+
+// Missões interativas com medalhas
+const missoes = document.querySelectorAll(".missao");
+missoes.forEach(missao=>{
+  missao.addEventListener("click",()=>{
+    const pontos = parseInt(missao.dataset.pontos);
+    const aluno = alunos[Math.floor(Math.random()*alunos.length)];
+    aluno.pontos += pontos;
+
+    // Cria medalha visual
+    const medalha = document.createElement("div");
+    medalha.classList.add("medalha");
+    medalha.textContent = "🏅";
+    missao.appendChild(medalha);
+    setTimeout(()=> missao.removeChild(medalha), 1000);
+
+    alert(`${aluno.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
     renderRanking();
-
-    const missoes = document.querySelectorAll(".missao");
-    missoes.forEach(missao=>{
-      missao.addEventListener("click",()=>{
-        const pontos = parseInt(missao.dataset.pontos);
-        const aluno = alunos[Math.floor(Math.random()*alunos.length)];
-        aluno.pontos += pontos;
-        alert(`${aluno.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
-        renderRanking();
-      });
-    });
-  </script>
+  });
+});
+</script>
 
 </body>
 </html>
