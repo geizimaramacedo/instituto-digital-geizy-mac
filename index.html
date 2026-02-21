@@ -58,6 +58,54 @@
       background-color: #e6c200;
     }
 
+    /* Projeto Educacional */
+    .projeto-educacional {
+      padding: 80px 20px;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .projeto-educacional h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: #800000; /* Marsala */
+    }
+
+    .cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .card {
+      background-color: #800000; /* Marsala */
+      color: #FFD700; /* Dourado */
+      padding: 30px 20px;
+      border-radius: 12px;
+      width: 220px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1rem;
+    }
+
     /* Responsivo */
     @media (max-width: 768px) {
       .hero h1 {
@@ -65,6 +113,15 @@
       }
       .hero p {
         font-size: 1.2rem;
+      }
+
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        width: 80%;
       }
     }
   </style>
@@ -78,4 +135,32 @@
     <a href="#newsletter">Fique por dentro do lançamento</a>
   </section>
 
-</body
+  <!-- Projeto Educacional -->
+  <section class="projeto-educacional">
+    <h2>Nosso Projeto Educacional</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">💻</div>
+        <h3>Tecnologia</h3>
+        <p>Recursos digitais e IA para um aprendizado inovador.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Arte</h3>
+        <p>Desenvolvimento criativo através das linguagens artísticas.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h3>Cidadania</h3>
+        <p>Valores e cultura local para formar cidadãos conscientes.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📚</div>
+        <h3>Literatura</h3>
+        <p>Alfabetização e expressão para todas as idades.</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
