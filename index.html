@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instituto Digital Geizy Mac</title>
+  <title>Instituto Digital Geizy Macedo</title>
   <style>
     /* Reset básico */
     * {
@@ -106,6 +106,55 @@
       font-size: 1rem;
     }
 
+    /* Estrutura Futura da Escola Digital */
+    .futuro-digital {
+      background-color: #f9f9f9;
+      padding: 80px 20px;
+    }
+
+    .futuro-digital .container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .futuro-digital .col {
+      flex: 1 1 400px;
+    }
+
+    .futuro-digital .col.imagem img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .futuro-digital .col.texto h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #800000; /* Marsala */
+    }
+
+    .futuro-digital .col.texto p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .futuro-digital .col.texto a {
+      text-decoration: none;
+      color: #800000;
+      background-color: #FFD700;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .futuro-digital .col.texto a:hover {
+      background-color: #e6c200;
+    }
+
     /* Responsivo */
     @media (max-width: 768px) {
       .hero h1 {
@@ -122,6 +171,18 @@
 
       .card {
         width: 80%;
+      }
+
+      .futuro-digital .container {
+        flex-direction: column;
+      }
+
+      .futuro-digital .col.texto h2 {
+        font-size: 1.7rem;
+      }
+
+      .futuro-digital .col.texto p {
+        font-size: 1rem;
       }
     }
   </style>
@@ -158,6 +219,20 @@
         <div class="icon">📚</div>
         <h3>Literatura</h3>
         <p>Alfabetização e expressão para todas as idades.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estrutura Futura da Escola Digital -->
+  <section class="futuro-digital">
+    <div class="container">
+      <div class="col imagem">
+        <img src="plataforma-mockup.png" alt="Mockup da plataforma" />
+      </div>
+      <div class="col texto">
+        <h2>Nosso Futuro Digital</h2>
+        <p>Um espaço inovador, interativo e conectado com a comunidade, preparado para transformar a aprendizagem e integrar tecnologia e educação local.</p>
+        <a href="#newsletter">Receba novidades</a>
       </div>
     </div>
   </section>
