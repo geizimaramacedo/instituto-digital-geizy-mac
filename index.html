@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Instituto Digital Geizy Macedo</title>
   <meta charset="UTF-8">
+  <title>Instituto Digital Geizy Macedo</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color:black; color:gold; text-align:center; font-family:Arial;">
-  <h1>Instituto Digital Geizy Macedo</h1>
-  <p>Plataforma educacional oficial</p>
-  <button onclick="alert('Em construção')">Entrar na Plataforma</button>
+<body>
+  <div class="container">
+    <h1>Instituto Digital Geizy Macedo</h1>
+    <p>Plataforma educacional oficial</p>
+
+    <div class="login-box">
+      <input type="text" id="nome" placeholder="Nome">
+      <input type="password" id="senha" placeholder="Senha">
+      <input type="text" id="codigo" placeholder="Código da Turma">
+      <button id="entrar">Entrar na Plataforma</button>
+      <p id="mensagem"></p>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
