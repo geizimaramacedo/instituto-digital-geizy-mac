@@ -73,6 +73,7 @@ section { padding:60px 20px; }
 <a href="#newsletter">Fique por dentro do lançamento</a>
 </section>
 
+<!-- PROJETO -->
 <section class="projeto-educacional container">
 <h2>Nosso Projeto Educacional</h2>
 <div class="cards">
@@ -83,6 +84,7 @@ section { padding:60px 20px; }
 </div>
 </section>
 
+<!-- FUTURO -->
 <section class="futuro-digital container">
 <div class="col"><img src="plataforma-mockup.png" alt="Mockup da plataforma"></div>
 <div class="col">
@@ -92,6 +94,7 @@ section { padding:60px 20px; }
 </div>
 </section>
 
+<!-- FUNDAORA -->
 <section class="sobre-fundadora container">
 <div class="col"><img src="fundadora .png" alt="Foto da fundadora"></div>
 <div class="col">
@@ -102,6 +105,7 @@ section { padding:60px 20px; }
 </div>
 </section>
 
+<!-- NEWSLETTER -->
 <section class="newsletter" id="newsletter">
 <div class="container">
 <h2>Fique por dentro das novidades</h2>
@@ -113,16 +117,16 @@ section { padding:60px 20px; }
 </div>
 </section>
 
-<!-- LOGIN ALUNO -->
+<!-- LOGIN -->
 <section id="login" class="container">
 <h2>Login do Aluno</h2>
 <input type="text" id="loginCodigo" placeholder="Código ou Nome do Aluno">
 <input type="password" id="loginSenha" placeholder="Senha">
 <button onclick="fazerLogin()">Entrar</button>
-<p id="msgLogin"></p>
+<p id="msgLogin">Faça login para acessar a plataforma.</p>
 </section>
 
-<!-- PLATAFORMA INTERNA -->
+<!-- PLATAFORMA -->
 <section class="plataforma container">
 <h2>🖥️ Plataforma Interna</h2>
 
@@ -138,37 +142,42 @@ section { padding:60px 20px; }
 </select>
 <select name="turma">
   <option value="">Selecione Turma (apenas alunos)</option>
-  <option value="1º Ano">1º Ano</option>
-  <option value="2º Ano">2º Ano</option>
-  <option value="3º Ano">3º Ano</option>
+  <option value="6º Ano">6º Ano</option>
+  <option value="7º Ano">7º Ano</option>
+  <option value="8º Ano">8º Ano</option>
+  <option value="9º Ano">9º Ano</option>
 </select>
 <button type="submit">Cadastrar</button>
 </form>
 
 <h3>🏆 Aluno Destaque</h3>
-<div id="alunoDestaque" class="aluno-destaque"></div>
+<div id="alunoDestaque" class="aluno-destaque">Sem alunos ainda</div>
 
 <h3>💛 Aluno Superação</h3>
-<div id="alunoSuperacao" class="aluno-superacao"></div>
+<div id="alunoSuperacao" class="aluno-superacao">Sem alunos ainda</div>
 
 <h3>Ranking de Alunos</h3>
-<div class="ranking" id="ranking"></div>
+<div class="ranking" id="ranking">
+  <div class="aluno">Sem alunos cadastrados</div>
+</div>
 
 <h3>Mural Digital</h3>
-<div id="pendentesArea"></div>
-<div class="mural" id="mural"></div>
+<div id="pendentesArea">Nenhuma postagem pendente</div>
+<div class="mural" id="mural">
+  <div class="postagem">Nenhuma postagem publicada</div>
+</div>
 
 <h3>Missões Semanais/Bimestrais</h3>
 <div class="missoes" id="missoes">
-<div class="missao" data-pontos="10">🧠 Conhecimento</div>
-<div class="missao" data-pontos="15">🎨 Criativo</div>
-<div class="missao" data-pontos="10">📖 Leitura</div>
-<div class="missao" data-pontos="5">🌱 Cidadania</div>
-<div class="missao" data-pontos="20">📸 Prática</div>
+  <div class="missao" data-pontos="10">🧠 Conhecimento</div>
+  <div class="missao" data-pontos="15">🎨 Criativo</div>
+  <div class="missao" data-pontos="10">📖 Leitura</div>
+  <div class="missao" data-pontos="5">🌱 Cidadania</div>
+  <div class="missao" data-pontos="20">📸 Prática</div>
 </div>
 
 <h3>📝 Avaliações Digitais</h3>
-<div class="avaliacoes container" id="avaliacaoArea"></div>
+<div class="avaliacoes container" id="avaliacaoArea">Nenhuma avaliação iniciada</div>
 <button onclick="iniciarAvaliacao()">Iniciar Avaliação</button>
 
 </section>
@@ -183,12 +192,13 @@ section { padding:60px 20px; }
 </footer>
 
 <script>
-// --- DADOS INICIAIS ---
+// --- DADOS ---
 const usuarios = [{ nome:"Geizy", tipo:"admin" }];
 const alunos = [];
 const muralData = [];
 const postagensPendentes = [];
 const avaliacoes = [{ titulo:"Prova de Conhecimento", perguntas:[{pergunta:"Qual é a capital de Minas Gerais?", resposta:"Belo Horizonte", pontos:10},{pergunta:"Qual cor resulta da mistura de vermelho e amarelo?", resposta:"Laranja", pontos:10}]}];
+let alunoLogado = null;
 
 // --- LOGIN ---
 function fazerLogin(){
@@ -196,9 +206,12 @@ function fazerLogin(){
   const senha = document.getElementById("loginSenha").value;
   const usuario = alunos.find(a => (a.codigo === codigo || a.nome === codigo) && a.senha === senha);
   if(usuario){
+    alunoLogado = usuario;
     document.getElementById("msgLogin").textContent = "Login realizado com sucesso!";
     document.querySelector(".plataforma").style.display="block";
     window.scrollTo({top:document.querySelector(".plataforma").offsetTop, behavior:"smooth"});
+    atualizarDestaques();
+    renderRanking();
   } else {
     document.getElementById("msgLogin").textContent = "Código ou senha inválidos!";
   }
@@ -225,7 +238,7 @@ document.getElementById("cadastroUsuario").addEventListener("submit", function(e
 // --- MURAL ---
 function renderMural(){
   const mural = document.getElementById("mural");
-  mural.innerHTML = "";
+  mural.innerHTML = muralData.length===0?'<div class="postagem">Nenhuma postagem publicada</div>':'';
   muralData.forEach(post => {
     const div = document.createElement("div");
     div.classList.add("postagem");
@@ -236,7 +249,7 @@ function renderMural(){
 
 function renderPendentes(){
   const area = document.getElementById("pendentesArea");
-  area.innerHTML = "<h4>Postagens Pendentes:</h4>";
+  area.innerHTML = postagensPendentes.length===0?"Nenhuma postagem pendente":"<h4>Postagens Pendentes:</h4>";
   postagensPendentes.forEach((p,i)=>{
     const div = document.createElement("div");
     div.innerHTML = `<strong>${p.aluno}:</strong> ${p.conteudo} <button onclick="aprovarPostagem(${i})">Aprovar</button>`;
@@ -255,6 +268,7 @@ function aprovarPostagem(index){
 function renderRanking(){
   const rankingEl = document.getElementById("ranking");
   rankingEl.innerHTML = "";
+  if(alunos.length===0){ rankingEl.innerHTML='<div class="aluno">Sem alunos cadastrados</div>'; return;}
   alunos.sort((a,b)=>b.pontos-a.pontos);
   alunos.forEach((aluno,index)=>{
     const div = document.createElement("div");
@@ -269,42 +283,37 @@ function renderRanking(){
 function atualizarDestaques(){
   if(alunos.length===0) return;
   const destaque = alunos.reduce((a,b)=> a.pontos>b.pontos?a:b);
-  document.getElementById("alunoDestaque").innerHTML = `<strong>${destaque.nome}</strong> - ${destaque.pontos} pts 🏅 Med: ${destaque.medalhas}`;
+  document.getElementById("alunoDestaque").textContent = `${destaque.nome} - ${destaque.pontos} pts`;
   const superacao = alunos.reduce((a,b)=> a.pontos<b.pontos?a:b);
-  document.getElementById("alunoSuperacao").innerHTML = `<strong>${superacao.nome}</strong> - ${superacao.pontos} pts 🏅 Med: ${superacao.medalhas}`;
+  document.getElementById("alunoSuperacao").textContent = `${superacao.nome} - ${superacao.pontos} pts`;
 }
 
-// --- NÍVEL ---
 function atualizarNivel(aluno){
-  const pontos = aluno.pontos;
-  if(pontos>=100) aluno.nivel="Líder da Turma";
-  else if(pontos>=60) aluno.nivel="Mestre";
-  else if(pontos>=30) aluno.nivel="Criador";
+  if(aluno.pontos>=50) aluno.nivel="Mestre";
+  else if(aluno.pontos>=30) aluno.nivel="Criador";
   else aluno.nivel="Explorador";
 }
 
 // --- MISSÕES ---
 document.querySelectorAll(".missao").forEach(missao=>{
   missao.addEventListener("click", ()=>{
-    if(alunos.length===0){ alert("Nenhum aluno cadastrado."); return;}
-    const aluno = alunos[0]; // Exemplo: primeiro aluno logado
+    if(!alunoLogado){ alert("Faça login para completar missões"); return;}
     const pontos = parseInt(missao.dataset.pontos);
-    aluno.pontos += pontos;
-    aluno.medalhas +=1;
-    atualizarNivel(aluno);
+    alunoLogado.pontos += pontos;
+    alunoLogado.medalhas +=1;
+    atualizarNivel(alunoLogado);
     renderRanking();
     atualizarDestaques();
-    alert(`${aluno.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
+    alert(`${alunoLogado.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
   });
 });
 
 // --- AVALIAÇÕES ---
 function iniciarAvaliacao(){
-  if(alunos.length===0){ alert("Nenhum aluno cadastrado."); return;}
+  if(!alunoLogado){ alert("Faça login para iniciar a avaliação"); return;}
   window.onbeforeunload = function(){ return "Avaliação em andamento!"; };
-  const aluno = alunos[0]; // exemplo
   const area = document.getElementById("avaliacaoArea");
-  area.innerHTML = `<h4>${aluno.nome} - Avaliação</h4>`;
+  area.innerHTML = `<h4>${alunoLogado.nome} - Avaliação</h4>`;
   avaliacoes.forEach(av=>{
     av.perguntas.forEach(p=>{
       area.innerHTML += `<p>${p.pergunta}</p><input type="text" data-resposta="${p.resposta}">`;
@@ -317,18 +326,18 @@ function iniciarAvaliacao(){
     area.querySelectorAll("input").forEach(input=>{
       if(input.value.toLowerCase()===input.dataset.resposta.toLowerCase()) pontosGanhos +=10;
     });
-    aluno.pontos += pontosGanhos;
-    atualizarNivel(aluno);
+    alunoLogado.pontos += pontosGanhos;
+    atualizarNivel(alunoLogado);
     renderRanking();
     atualizarDestaques();
-    alert(`${aluno.nome} concluiu a avaliação e ganhou ${pontosGanhos} pontos!`);
-    area.innerHTML="";
+    alert(`${alunoLogado.nome} concluiu a avaliação e ganhou ${pontosGanhos} pontos!`);
+    area.innerHTML="Nenhuma avaliação iniciada";
     window.onbeforeunload = null;
   };
   area.appendChild(btn);
 }
 
-// --- Inicialização ---
+// --- INICIALIZAÇÃO ---
 renderMural();
 renderPendentes();
 renderRanking();
