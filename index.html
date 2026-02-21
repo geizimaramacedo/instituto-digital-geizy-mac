@@ -40,28 +40,18 @@ section { padding:60px 20px; }
 .rodape .social { margin-top:8px; font-size:0.9rem; }
 .rodape .social a { color:#800000; margin:0 5px; }
 .rodape .social a:hover { color:#e6c200; }
-.plataforma { background:#f5f5f5; padding:40px 20px; border-radius:12px; margin-top:40px; display:none; }
+.plataforma { background:#f5f5f5; padding:40px 20px; border-radius:12px; margin-top:40px; }
 .plataforma h2 { text-align:center; margin-bottom:30px; }
 .mural { display:flex; flex-direction:column; gap:20px; margin-bottom:40px; }
 .postagem { border:1px solid #800000; border-radius:10px; padding:15px; background:#FFD700; }
 .missoes { display:flex; flex-wrap:wrap; gap:15px; margin-bottom:30px; justify-content:center; }
 .missao { background:#800000; color:#FFD700; padding:15px; border-radius:10px; flex:1 1 180px; text-align:center; cursor:pointer; transition:0.3s; position:relative; }
 .missao:hover { transform:translateY(-3px); }
-.missao .medalha { position:absolute; top:-10px; right:-10px; background:#FFD700; color:#800000; font-weight:bold; border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; animation:pulse 0.6s ease;}
-@keyframes pulse {0% { transform: scale(0.5); opacity:0;} 50% { transform: scale(1.2); opacity:1;} 100% { transform: scale(1); opacity:1;} }
 .ranking { display:flex; flex-direction:column; gap:10px; max-width:500px; margin:0 auto; }
 .aluno { padding:10px; border-radius:8px; background:#f9f9f9; display:flex; justify-content:space-between; transition:0.4s; }
-.aluno.destaque { background:#FFD700; font-weight:bold; }
-.aluno.superacao { background:#e6c200; font-weight:bold; cursor:pointer; }
 .aluno-destaque, .aluno-superacao { padding:15px; border-radius:12px; text-align:center; margin-bottom:20px; font-weight:bold; }
 .aluno-superacao { background:#e6c200; }
-.avaliacoes { background:#f9f9f9; padding:40px 20px; border-radius:12px; margin-top:40px; }
-.avaliacoes h2 { text-align:center; margin-bottom:30px; }
 @media(max-width:768px){.cards, .missoes { flex-direction:column; align-items:center; }.futuro-digital .container, .sobre-fundadora .container { flex-direction:column; }}
-#login { padding:40px; text-align:center; }
-#login input { padding:12px; margin:5px; border-radius:8px; border:1px solid #ccc; width:200px; max-width:90%; }
-#login button { margin-top:10px; }
-#msgLogin { margin-top:10px; color:red; font-weight:bold; }
 </style>
 </head>
 <body>
@@ -117,69 +107,35 @@ section { padding:60px 20px; }
 </div>
 </section>
 
-<!-- LOGIN -->
-<section id="login" class="container">
-<h2>Login do Aluno</h2>
-<input type="text" id="loginCodigo" placeholder="Código ou Nome do Aluno">
-<input type="password" id="loginSenha" placeholder="Senha">
-<button onclick="fazerLogin()">Entrar</button>
-<p id="msgLogin">Faça login para acessar a plataforma.</p>
-</section>
-
-<!-- PLATAFORMA -->
+<!-- PLATAFORMA VISUAL -->
 <section class="plataforma container">
-<h2>🖥️ Plataforma Interna</h2>
-
-<h3>Cadastro de Usuários</h3>
-<form id="cadastroUsuario">
-<input type="text" placeholder="Nome" required>
-<input type="email" placeholder="E-mail">
-<select name="tipo" required>
-  <option value="">Tipo</option>
-  <option value="aluno">Aluno</option>
-  <option value="professor">Professor</option>
-  <option value="admin">Admin</option>
-</select>
-<select name="turma">
-  <option value="">Selecione Turma (apenas alunos)</option>
-  <option value="6º Ano">6º Ano</option>
-  <option value="7º Ano">7º Ano</option>
-  <option value="8º Ano">8º Ano</option>
-  <option value="9º Ano">9º Ano</option>
-</select>
-<button type="submit">Cadastrar</button>
-</form>
+<h2>🖥️ Plataforma Interna - Visualização</h2>
 
 <h3>🏆 Aluno Destaque</h3>
-<div id="alunoDestaque" class="aluno-destaque">Sem alunos ainda</div>
+<div id="alunoDestaque" class="aluno-destaque"></div>
 
 <h3>💛 Aluno Superação</h3>
-<div id="alunoSuperacao" class="aluno-superacao">Sem alunos ainda</div>
+<div id="alunoSuperacao" class="aluno-superacao"></div>
 
-<h3>Ranking de Alunos</h3>
-<div class="ranking" id="ranking">
-  <div class="aluno">Sem alunos cadastrados</div>
-</div>
+<h3>Ranking de Alunos por Turma</h3>
+<div id="ranking"></div>
 
 <h3>Mural Digital</h3>
-<div id="pendentesArea">Nenhuma postagem pendente</div>
-<div class="mural" id="mural">
-  <div class="postagem">Nenhuma postagem publicada</div>
+<div id="mural">
+  <div class="postagem">Alice (6º Ano) postou: Projeto de Matemática</div>
+  <div class="postagem">Bruno (7º Ano) postou: Experimento de Ciências</div>
+  <div class="postagem">Carla (8º Ano) postou: Cartaz sobre Cidadania</div>
+  <div class="postagem">Daniel (9º Ano) postou: Texto de Literatura</div>
 </div>
 
 <h3>Missões Semanais/Bimestrais</h3>
-<div class="missoes" id="missoes">
+<div class="missoes">
   <div class="missao" data-pontos="10">🧠 Conhecimento</div>
   <div class="missao" data-pontos="15">🎨 Criativo</div>
   <div class="missao" data-pontos="10">📖 Leitura</div>
   <div class="missao" data-pontos="5">🌱 Cidadania</div>
   <div class="missao" data-pontos="20">📸 Prática</div>
 </div>
-
-<h3>📝 Avaliações Digitais</h3>
-<div class="avaliacoes container" id="avaliacaoArea">Nenhuma avaliação iniciada</div>
-<button onclick="iniciarAvaliacao()">Iniciar Avaliação</button>
-
 </section>
 
 <footer class="rodape">
@@ -192,154 +148,44 @@ section { padding:60px 20px; }
 </footer>
 
 <script>
-// --- DADOS ---
-const usuarios = [{ nome:"Geizy", tipo:"admin" }];
-const alunos = [];
-const muralData = [];
-const postagensPendentes = [];
-const avaliacoes = [{ titulo:"Prova de Conhecimento", perguntas:[{pergunta:"Qual é a capital de Minas Gerais?", resposta:"Belo Horizonte", pontos:10},{pergunta:"Qual cor resulta da mistura de vermelho e amarelo?", resposta:"Laranja", pontos:10}]}];
-let alunoLogado = null;
+// --- DADOS PARA VISUALIZAÇÃO ---
+const alunos = [
+  { nome:"Alice", pontos:20, medalhas:1, nivel:"Explorador", turma:"6º Ano" },
+  { nome:"Bruno", pontos:35, medalhas:2, nivel:"Criador", turma:"7º Ano" },
+  { nome:"Carla", pontos:10, medalhas:0, nivel:"Explorador", turma:"8º Ano" },
+  { nome:"Daniel", pontos:50, medalhas:3, nivel:"Mestre", turma:"9º Ano" }
+];
 
-// --- LOGIN ---
-function fazerLogin(){
-  const codigo = document.getElementById("loginCodigo").value;
-  const senha = document.getElementById("loginSenha").value;
-  const usuario = alunos.find(a => (a.codigo === codigo || a.nome === codigo) && a.senha === senha);
-  if(usuario){
-    alunoLogado = usuario;
-    document.getElementById("msgLogin").textContent = "Login realizado com sucesso!";
-    document.querySelector(".plataforma").style.display="block";
-    window.scrollTo({top:document.querySelector(".plataforma").offsetTop, behavior:"smooth"});
-    atualizarDestaques();
-    renderRanking();
-  } else {
-    document.getElementById("msgLogin").textContent = "Código ou senha inválidos!";
-  }
-}
-
-// --- CADASTRO ---
-document.getElementById("cadastroUsuario").addEventListener("submit", function(e){
-  e.preventDefault();
-  const nome = this.querySelector('input[type="text"]').value;
-  const email = this.querySelector('input[type="email"]').value;
-  const tipo = this.querySelector('select[name="tipo"]').value;
-  const turma = this.querySelector('select[name="turma"]').value;
-  const codigo = "AL"+String(alunos.length+1).padStart(3,"0");
-  const senha = "1234";
-  const novoUsuario = { nome, email, tipo, pontos:0, medalhas:0, nivel:"Explorador", turma:turma||null, codigo, senha };
-  usuarios.push(novoUsuario);
-  if(tipo==="aluno") alunos.push(novoUsuario);
-  alert(`${tipo} ${nome} cadastrado! Código: ${codigo}, Senha: ${senha}`);
-  renderRanking();
-  atualizarDestaques();
-  this.reset();
-});
-
-// --- MURAL ---
-function renderMural(){
-  const mural = document.getElementById("mural");
-  mural.innerHTML = muralData.length===0?'<div class="postagem">Nenhuma postagem publicada</div>':'';
-  muralData.forEach(post => {
-    const div = document.createElement("div");
-    div.classList.add("postagem");
-    div.innerHTML = `<h3>${post.titulo}</h3><p>${post.conteudo}</p>`;
-    mural.appendChild(div);
-  });
-}
-
-function renderPendentes(){
-  const area = document.getElementById("pendentesArea");
-  area.innerHTML = postagensPendentes.length===0?"Nenhuma postagem pendente":"<h4>Postagens Pendentes:</h4>";
-  postagensPendentes.forEach((p,i)=>{
-    const div = document.createElement("div");
-    div.innerHTML = `<strong>${p.aluno}:</strong> ${p.conteudo} <button onclick="aprovarPostagem(${i})">Aprovar</button>`;
-    area.appendChild(div);
-  });
-}
-
-function aprovarPostagem(index){
-  const postagem = postagensPendentes.splice(index,1)[0];
-  muralData.push({ titulo:`Postagem de ${postagem.aluno}`, conteudo:postagem.conteudo });
-  renderMural();
-  renderPendentes();
-}
-
-// --- RANKING E DESTAQUES ---
+// --- FUNÇÕES ---
 function renderRanking(){
   const rankingEl = document.getElementById("ranking");
   rankingEl.innerHTML = "";
-  if(alunos.length===0){ rankingEl.innerHTML='<div class="aluno">Sem alunos cadastrados</div>'; return;}
-  alunos.sort((a,b)=>b.pontos-a.pontos);
-  alunos.forEach((aluno,index)=>{
-    const div = document.createElement("div");
-    div.classList.add("aluno");
-    if(index===0) div.classList.add("destaque");
-    if(aluno.pontos<=10) div.classList.add("superacao");
-    div.innerHTML = `<span>${aluno.nome} (${aluno.nivel})</span><span>${aluno.pontos} pts</span>`;
-    rankingEl.appendChild(div);
+  const turmas = ["6º Ano","7º Ano","8º Ano","9º Ano"];
+  turmas.forEach(turma=>{
+    const alunosTurma = alunos.filter(a=>a.turma===turma);
+    if(alunosTurma.length>0){
+      const titulo = document.createElement("h4");
+      titulo.textContent = turma;
+      rankingEl.appendChild(titulo);
+      alunosTurma.sort((a,b)=>b.pontos-a.pontos);
+      alunosTurma.forEach(aluno=>{
+        const div = document.createElement("div");
+        div.classList.add("aluno");
+        div.innerHTML = `<span>${aluno.nome} (${aluno.nivel})</span><span>${aluno.pontos} pts</span>`;
+        rankingEl.appendChild(div);
+      });
+    }
   });
 }
 
 function atualizarDestaques(){
-  if(alunos.length===0) return;
   const destaque = alunos.reduce((a,b)=> a.pontos>b.pontos?a:b);
   document.getElementById("alunoDestaque").textContent = `${destaque.nome} - ${destaque.pontos} pts`;
   const superacao = alunos.reduce((a,b)=> a.pontos<b.pontos?a:b);
   document.getElementById("alunoSuperacao").textContent = `${superacao.nome} - ${superacao.pontos} pts`;
 }
 
-function atualizarNivel(aluno){
-  if(aluno.pontos>=50) aluno.nivel="Mestre";
-  else if(aluno.pontos>=30) aluno.nivel="Criador";
-  else aluno.nivel="Explorador";
-}
-
-// --- MISSÕES ---
-document.querySelectorAll(".missao").forEach(missao=>{
-  missao.addEventListener("click", ()=>{
-    if(!alunoLogado){ alert("Faça login para completar missões"); return;}
-    const pontos = parseInt(missao.dataset.pontos);
-    alunoLogado.pontos += pontos;
-    alunoLogado.medalhas +=1;
-    atualizarNivel(alunoLogado);
-    renderRanking();
-    atualizarDestaques();
-    alert(`${alunoLogado.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
-  });
-});
-
-// --- AVALIAÇÕES ---
-function iniciarAvaliacao(){
-  if(!alunoLogado){ alert("Faça login para iniciar a avaliação"); return;}
-  window.onbeforeunload = function(){ return "Avaliação em andamento!"; };
-  const area = document.getElementById("avaliacaoArea");
-  area.innerHTML = `<h4>${alunoLogado.nome} - Avaliação</h4>`;
-  avaliacoes.forEach(av=>{
-    av.perguntas.forEach(p=>{
-      area.innerHTML += `<p>${p.pergunta}</p><input type="text" data-resposta="${p.resposta}">`;
-    });
-  });
-  const btn = document.createElement("button");
-  btn.textContent="Finalizar Avaliação";
-  btn.onclick = ()=>{
-    let pontosGanhos=0;
-    area.querySelectorAll("input").forEach(input=>{
-      if(input.value.toLowerCase()===input.dataset.resposta.toLowerCase()) pontosGanhos +=10;
-    });
-    alunoLogado.pontos += pontosGanhos;
-    atualizarNivel(alunoLogado);
-    renderRanking();
-    atualizarDestaques();
-    alert(`${alunoLogado.nome} concluiu a avaliação e ganhou ${pontosGanhos} pontos!`);
-    area.innerHTML="Nenhuma avaliação iniciada";
-    window.onbeforeunload = null;
-  };
-  area.appendChild(btn);
-}
-
-// --- INICIALIZAÇÃO ---
-renderMural();
-renderPendentes();
+// Inicializa visualização
 renderRanking();
 atualizarDestaques();
 </script>
