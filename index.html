@@ -6,7 +6,6 @@
 <title>Instituto Digital Geizy Mac</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* RESET E ESTILO GERAL */
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
 body { background:#fff; color:#333; line-height:1.6; }
 a { text-decoration:none; }
@@ -14,61 +13,34 @@ button,a { text-decoration:none; color: #800000; background-color: #FFD700; padd
 button:hover,a:hover { background-color:#e6c200; transform:translateY(-2px); }
 section { padding:60px 20px; }
 .container { max-width:1000px; margin:0 auto; }
-
-/* HERO */
-.hero {
-  background-color:#800000;
-  background-image:url('hero-image.png');
-  background-size:cover;
-  background-position:center;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:#FFD700;
-  padding:0 20px;
-}
+.hero { background-color:#800000; background-image:url('hero-image.png'); background-size:cover; background-position:center; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:#FFD700; padding:0 20px; }
 .hero h1 { font-size:3rem; margin-bottom:20px; }
 .hero p { font-size:1.5rem; margin-bottom:30px; }
-
-/* CARTÕES DO PROJETO */
 .projeto-educacional h2 { font-size:2.5rem; margin-bottom:50px; text-align:center; color:#800000; }
 .cards { display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; }
 .card { background-color:#800000; color:#FFD700; padding:30px 20px; border-radius:12px; width:220px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition:0.3s;}
 .card:hover { transform:translateY(-5px); }
 .card .icon { font-size:2.5rem; margin-bottom:15px; }
-
-/* FUTURO DIGITAL */
 .futuro-digital .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
 .futuro-digital .col { flex:1 1 400px; }
 .futuro-digital .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
 .futuro-digital .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
 .futuro-digital .col p { font-size:1.2rem; margin-bottom:20px; }
-
-/* SOBRE FUNDADORA */
 .sobre-fundadora .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
 .sobre-fundadora .col { flex:1 1 400px; }
 .sobre-fundadora .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
 .sobre-fundadora .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
 .sobre-fundadora .col p { font-size:1.2rem; margin-bottom:20px; }
-
-/* NEWSLETTER */
 .newsletter { background-color:#800000; color:#FFD700; text-align:center; padding:60px 20px; }
 .newsletter h2 { font-size:2rem; margin-bottom:15px; }
 .newsletter p { font-size:1.2rem; margin-bottom:30px; }
 .newsletter form { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
 .newsletter input[type="email"] { padding:12px 15px; border-radius:8px; border:none; width:250px; max-width:100%; }
-
-/* RODAPÉ */
 .rodape { background-color:#f9f9f9; color:#800000; text-align:center; padding:20px; font-size:0.9rem; }
 .rodape .social { margin-top:8px; font-size:0.9rem; }
 .rodape .social a { color:#800000; margin:0 5px; }
 .rodape .social a:hover { color:#e6c200; }
-
-/* PLATAFORMA INTERNA */
-.plataforma { background:#f5f5f5; padding:40px 20px; border-radius:12px; margin-top:40px; }
+.plataforma { background:#f5f5f5; padding:40px 20px; border-radius:12px; margin-top:40px; display:none; }
 .plataforma h2 { text-align:center; margin-bottom:30px; }
 .mural { display:flex; flex-direction:column; gap:20px; margin-bottom:40px; }
 .postagem { border:1px solid #800000; border-radius:10px; padding:15px; background:#FFD700; }
@@ -77,30 +49,24 @@ section { padding:60px 20px; }
 .missao:hover { transform:translateY(-3px); }
 .missao .medalha { position:absolute; top:-10px; right:-10px; background:#FFD700; color:#800000; font-weight:bold; border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; animation:pulse 0.6s ease;}
 @keyframes pulse {0% { transform: scale(0.5); opacity:0;} 50% { transform: scale(1.2); opacity:1;} 100% { transform: scale(1); opacity:1;} }
-
 .ranking { display:flex; flex-direction:column; gap:10px; max-width:500px; margin:0 auto; }
 .aluno { padding:10px; border-radius:8px; background:#f9f9f9; display:flex; justify-content:space-between; transition:0.4s; }
 .aluno.destaque { background:#FFD700; font-weight:bold; }
 .aluno.superacao { background:#e6c200; font-weight:bold; cursor:pointer; }
-
-/* Destaques fixos */
 .aluno-destaque, .aluno-superacao { padding:15px; border-radius:12px; text-align:center; margin-bottom:20px; font-weight:bold; }
 .aluno-superacao { background:#e6c200; }
-
-/* Avaliações */
 .avaliacoes { background:#f9f9f9; padding:40px 20px; border-radius:12px; margin-top:40px; }
 .avaliacoes h2 { text-align:center; margin-bottom:30px; }
-
-/* Responsivo */
-@media(max-width:768px){
-  .cards, .missoes { flex-direction:column; align-items:center; }
-  .futuro-digital .container, .sobre-fundadora .container { flex-direction:column; }
-}
+@media(max-width:768px){.cards, .missoes { flex-direction:column; align-items:center; }.futuro-digital .container, .sobre-fundadora .container { flex-direction:column; }}
+#login { padding:40px; text-align:center; }
+#login input { padding:12px; margin:5px; border-radius:8px; border:1px solid #ccc; width:200px; max-width:90%; }
+#login button { margin-top:10px; }
+#msgLogin { margin-top:10px; color:red; font-weight:bold; }
 </style>
 </head>
 <body>
 
-<!-- PÁGINA PÚBLICA -->
+<!-- HERO -->
 <section class="hero">
 <h1>Aprender, criar e se conectar com a educação digital</h1>
 <p>Escola digital com raízes na comunidade e metodologia inovadora</p>
@@ -147,15 +113,23 @@ section { padding:60px 20px; }
 </div>
 </section>
 
+<!-- LOGIN ALUNO -->
+<section id="login" class="container">
+<h2>Login do Aluno</h2>
+<input type="text" id="loginCodigo" placeholder="Código ou Nome do Aluno">
+<input type="password" id="loginSenha" placeholder="Senha">
+<button onclick="fazerLogin()">Entrar</button>
+<p id="msgLogin"></p>
+</section>
+
 <!-- PLATAFORMA INTERNA -->
 <section class="plataforma container">
 <h2>🖥️ Plataforma Interna</h2>
 
-<!-- CADASTRO DE USUÁRIOS -->
 <h3>Cadastro de Usuários</h3>
 <form id="cadastroUsuario">
 <input type="text" placeholder="Nome" required>
-<input type="email" placeholder="E-mail" required>
+<input type="email" placeholder="E-mail">
 <select name="tipo" required>
   <option value="">Tipo</option>
   <option value="aluno">Aluno</option>
@@ -171,23 +145,19 @@ section { padding:60px 20px; }
 <button type="submit">Cadastrar</button>
 </form>
 
-<!-- DESTAQUES FIXOS -->
 <h3>🏆 Aluno Destaque</h3>
 <div id="alunoDestaque" class="aluno-destaque"></div>
 
 <h3>💛 Aluno Superação</h3>
 <div id="alunoSuperacao" class="aluno-superacao"></div>
 
-<!-- RANKING -->
 <h3>Ranking de Alunos</h3>
 <div class="ranking" id="ranking"></div>
 
-<!-- MURAL DIGITAL -->
 <h3>Mural Digital</h3>
 <div id="pendentesArea"></div>
 <div class="mural" id="mural"></div>
 
-<!-- MISSÕES -->
 <h3>Missões Semanais/Bimestrais</h3>
 <div class="missoes" id="missoes">
 <div class="missao" data-pontos="10">🧠 Conhecimento</div>
@@ -197,7 +167,6 @@ section { padding:60px 20px; }
 <div class="missao" data-pontos="20">📸 Prática</div>
 </div>
 
-<!-- AVALIAÇÕES -->
 <h3>📝 Avaliações Digitais</h3>
 <div class="avaliacoes container" id="avaliacaoArea"></div>
 <button onclick="iniciarAvaliacao()">Iniciar Avaliação</button>
@@ -215,21 +184,45 @@ section { padding:60px 20px; }
 
 <script>
 // --- DADOS INICIAIS ---
-const usuarios = [
-  { nome:"Geizy", tipo:"admin" }
-];
+const usuarios = [{ nome:"Geizy", tipo:"admin" }];
 const alunos = [];
 const muralData = [];
 const postagensPendentes = [];
-const avaliacoes = [
-  { titulo: "Prova de Conhecimento", perguntas:[
-    { pergunta: "Qual é a capital de Minas Gerais?", resposta: "Belo Horizonte", pontos:10 },
-    { pergunta: "Qual cor resulta da mistura de vermelho e amarelo?", resposta: "Laranja", pontos:10 }
-  ]}
-];
+const avaliacoes = [{ titulo:"Prova de Conhecimento", perguntas:[{pergunta:"Qual é a capital de Minas Gerais?", resposta:"Belo Horizonte", pontos:10},{pergunta:"Qual cor resulta da mistura de vermelho e amarelo?", resposta:"Laranja", pontos:10}]}];
 
-// --- FUNÇÕES ---
-// Renderiza mural
+// --- LOGIN ---
+function fazerLogin(){
+  const codigo = document.getElementById("loginCodigo").value;
+  const senha = document.getElementById("loginSenha").value;
+  const usuario = alunos.find(a => (a.codigo === codigo || a.nome === codigo) && a.senha === senha);
+  if(usuario){
+    document.getElementById("msgLogin").textContent = "Login realizado com sucesso!";
+    document.querySelector(".plataforma").style.display="block";
+    window.scrollTo({top:document.querySelector(".plataforma").offsetTop, behavior:"smooth"});
+  } else {
+    document.getElementById("msgLogin").textContent = "Código ou senha inválidos!";
+  }
+}
+
+// --- CADASTRO ---
+document.getElementById("cadastroUsuario").addEventListener("submit", function(e){
+  e.preventDefault();
+  const nome = this.querySelector('input[type="text"]').value;
+  const email = this.querySelector('input[type="email"]').value;
+  const tipo = this.querySelector('select[name="tipo"]').value;
+  const turma = this.querySelector('select[name="turma"]').value;
+  const codigo = "AL"+String(alunos.length+1).padStart(3,"0");
+  const senha = "1234";
+  const novoUsuario = { nome, email, tipo, pontos:0, medalhas:0, nivel:"Explorador", turma:turma||null, codigo, senha };
+  usuarios.push(novoUsuario);
+  if(tipo==="aluno") alunos.push(novoUsuario);
+  alert(`${tipo} ${nome} cadastrado! Código: ${codigo}, Senha: ${senha}`);
+  renderRanking();
+  atualizarDestaques();
+  this.reset();
+});
+
+// --- MURAL ---
 function renderMural(){
   const mural = document.getElementById("mural");
   mural.innerHTML = "";
@@ -241,7 +234,6 @@ function renderMural(){
   });
 }
 
-// Renderiza pendentes
 function renderPendentes(){
   const area = document.getElementById("pendentesArea");
   area.innerHTML = "<h4>Postagens Pendentes:</h4>";
@@ -252,15 +244,14 @@ function renderPendentes(){
   });
 }
 
-// Aprovar postagem
 function aprovarPostagem(index){
   const postagem = postagensPendentes.splice(index,1)[0];
-  muralData.push({ titulo:`Postagem de ${postagem.aluno}`, conteudo: postagem.conteudo });
+  muralData.push({ titulo:`Postagem de ${postagem.aluno}`, conteudo:postagem.conteudo });
   renderMural();
   renderPendentes();
 }
 
-// Atualiza ranking e destaques
+// --- RANKING E DESTAQUES ---
 function renderRanking(){
   const rankingEl = document.getElementById("ranking");
   rankingEl.innerHTML = "";
@@ -270,7 +261,7 @@ function renderRanking(){
     div.classList.add("aluno");
     if(index===0) div.classList.add("destaque");
     if(aluno.pontos<=10) div.classList.add("superacao");
-    div.innerHTML = `<span>${aluno.nome} (${aluno.nivel || "Explorador"})</span><span>${aluno.pontos} pts</span>`;
+    div.innerHTML = `<span>${aluno.nome} (${aluno.nivel})</span><span>${aluno.pontos} pts</span>`;
     rankingEl.appendChild(div);
   });
 }
@@ -278,61 +269,40 @@ function renderRanking(){
 function atualizarDestaques(){
   if(alunos.length===0) return;
   const destaque = alunos.reduce((a,b)=> a.pontos>b.pontos?a:b);
-  document.getElementById("alunoDestaque").innerHTML = `<strong>${destaque.nome}</strong> - ${destaque.pontos} pts<br>🏅 Medalhas: ${destaque.medalhas || 0}`;
+  document.getElementById("alunoDestaque").innerHTML = `<strong>${destaque.nome}</strong> - ${destaque.pontos} pts 🏅 Med: ${destaque.medalhas}`;
   const superacao = alunos.reduce((a,b)=> a.pontos<b.pontos?a:b);
-  document.getElementById("alunoSuperacao").innerHTML = `<strong>${superacao.nome}</strong> - ${superacao.pontos} pts<br>🏅 Medalhas: ${superacao.medalhas || 0}`;
+  document.getElementById("alunoSuperacao").innerHTML = `<strong>${superacao.nome}</strong> - ${superacao.pontos} pts 🏅 Med: ${superacao.medalhas}`;
 }
 
-// Atualiza nível
+// --- NÍVEL ---
 function atualizarNivel(aluno){
   const pontos = aluno.pontos;
-  if(pontos >= 100) aluno.nivel = "Líder da Turma";
-  else if(pontos >= 60) aluno.nivel = "Mestre";
-  else if(pontos >= 30) aluno.nivel = "Criador";
-  else aluno.nivel = "Explorador";
+  if(pontos>=100) aluno.nivel="Líder da Turma";
+  else if(pontos>=60) aluno.nivel="Mestre";
+  else if(pontos>=30) aluno.nivel="Criador";
+  else aluno.nivel="Explorador";
 }
 
-// Cadastro de usuários
-document.getElementById("cadastroUsuario").addEventListener("submit", function(e){
-  e.preventDefault();
-  const nome = this.querySelector('input[type="text"]').value;
-  const email = this.querySelector('input[type="email"]').value;
-  const tipo = this.querySelector('select[name="tipo"]').value;
-  const turma = this.querySelector('select[name="turma"]').value;
-  const novoUsuario = { nome, email, tipo, pontos:0, medalhas:0, nivel:"Explorador", turma:turma||null };
-  usuarios.push(novoUsuario);
-  if(tipo==="aluno") alunos.push(novoUsuario);
-  alert(`${tipo} ${nome} cadastrado com sucesso!`);
-  renderRanking();
-  atualizarDestaques();
-  this.reset();
-});
-
-// Missões interativas
+// --- MISSÕES ---
 document.querySelectorAll(".missao").forEach(missao=>{
   missao.addEventListener("click", ()=>{
     if(alunos.length===0){ alert("Nenhum aluno cadastrado."); return;}
+    const aluno = alunos[0]; // Exemplo: primeiro aluno logado
     const pontos = parseInt(missao.dataset.pontos);
-    const aluno = alunos[Math.floor(Math.random()*alunos.length)];
     aluno.pontos += pontos;
-    aluno.medalhas = (aluno.medalhas||0)+1;
+    aluno.medalhas +=1;
     atualizarNivel(aluno);
-    const medalha = document.createElement("div");
-    medalha.classList.add("medalha");
-    medalha.textContent="🏅";
-    missao.appendChild(medalha);
-    setTimeout(()=> missao.removeChild(medalha),1000);
-    alert(`${aluno.nome} completou "${missao.textContent}" e ganhou ${pontos} pontos!`);
     renderRanking();
     atualizarDestaques();
+    alert(`${aluno.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
   });
 });
 
-// Avaliações simuladas
+// --- AVALIAÇÕES ---
 function iniciarAvaliacao(){
   if(alunos.length===0){ alert("Nenhum aluno cadastrado."); return;}
   window.onbeforeunload = function(){ return "Avaliação em andamento!"; };
-  const aluno = alunos[Math.floor(Math.random()*alunos.length)];
+  const aluno = alunos[0]; // exemplo
   const area = document.getElementById("avaliacaoArea");
   area.innerHTML = `<h4>${aluno.nome} - Avaliação</h4>`;
   avaliacoes.forEach(av=>{
@@ -358,7 +328,7 @@ function iniciarAvaliacao(){
   area.appendChild(btn);
 }
 
-// Inicializa
+// --- Inicialização ---
 renderMural();
 renderPendentes();
 renderRanking();
