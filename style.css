@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: #800020; /* Marsala */
   color: gold;
   font-family: Arial, sans-serif;
   text-align: center;
@@ -8,13 +8,16 @@ body {
 }
 
 .container {
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 .login-box {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: left;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  border-radius: 10px;
 }
 
 .login-box input {
@@ -23,25 +26,22 @@ body {
   padding: 10px;
   margin: 10px 0;
   border: 1px solid gold;
-  background-color: black;
+  background-color: #5a0015;
   color: gold;
+  border-radius: 5px;
 }
 
 .login-box button {
   width: 270px;
   padding: 10px;
   background-color: gold;
-  color: black;
+  color: #800020;
   border: none;
   cursor: pointer;
   font-weight: bold;
+  border-radius: 5px;
 }
 
 .login-box button:hover {
-  background-color: #ffc700;
-}
-
-#mensagem {
-  margin-top: 10px;
-  font-weight: bold;
+  background-color: #ffd700;
 }
