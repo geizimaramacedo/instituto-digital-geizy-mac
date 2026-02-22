@@ -3,113 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instituto Digital Geizy Mac</title>
+<title>Instituto Digital Geizy Mac - Plataforma Final</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-body { background:#fff; color:#333; line-height:1.6; }
-a { text-decoration:none; }
-button,a { text-decoration:none; color: #800000; background-color: #FFD700; padding: 12px 20px; border-radius:8px; font-weight:bold; cursor:pointer; transition:0.3s; }
-button:hover,a:hover { background-color:#e6c200; transform:translateY(-2px); }
-section { padding:60px 20px; }
-.container { max-width:1000px; margin:0 auto; }
-.hero { background-color:#800000; background-image:url('hero-image.png'); background-size:cover; background-position:center; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:#FFD700; padding:0 20px; }
-.hero h1 { font-size:3rem; margin-bottom:20px; }
-.hero p { font-size:1.5rem; margin-bottom:30px; }
-.projeto-educacional h2 { font-size:2.5rem; margin-bottom:50px; text-align:center; color:#800000; }
-.cards { display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; }
-.card { background-color:#800000; color:#FFD700; padding:30px 20px; border-radius:12px; width:220px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition:0.3s;}
-.card:hover { transform:translateY(-5px); }
-.card .icon { font-size:2.5rem; margin-bottom:15px; }
-.futuro-digital .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
-.futuro-digital .col { flex:1 1 400px; }
-.futuro-digital .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
-.futuro-digital .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
-.futuro-digital .col p { font-size:1.2rem; margin-bottom:20px; }
-.sobre-fundadora .container { display:flex; justify-content:space-around; align-items:center; gap:30px; flex-wrap:wrap; }
-.sobre-fundadora .col { flex:1 1 400px; }
-.sobre-fundadora .col img { width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
-.sobre-fundadora .col h2 { font-size:2rem; margin-bottom:20px; color:#800000; }
-.sobre-fundadora .col p { font-size:1.2rem; margin-bottom:20px; }
-.newsletter { background-color:#800000; color:#FFD700; text-align:center; padding:60px 20px; }
-.newsletter h2 { font-size:2rem; margin-bottom:15px; }
-.newsletter p { font-size:1.2rem; margin-bottom:30px; }
-.newsletter form { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
-.newsletter input[type="email"] { padding:12px 15px; border-radius:8px; border:none; width:250px; max-width:100%; }
-.rodape { background-color:#f9f9f9; color:#800000; text-align:center; padding:20px; font-size:0.9rem; }
-.rodape .social { margin-top:8px; font-size:0.9rem; }
-.rodape .social a { color:#800000; margin:0 5px; }
-.rodape .social a:hover { color:#e6c200; }
-.plataforma { background:#f5f5f5; padding:40px 20px; border-radius:12px; margin-top:40px; }
-.plataforma h2 { text-align:center; margin-bottom:30px; }
-.mural { display:flex; flex-direction:column; gap:20px; margin-bottom:40px; }
-.postagem { border:1px solid #800000; border-radius:10px; padding:15px; background:#FFD700; }
-.missoes { display:flex; flex-wrap:wrap; gap:15px; margin-bottom:30px; justify-content:center; }
-.missao { background:#800000; color:#FFD700; padding:15px; border-radius:10px; flex:1 1 180px; text-align:center; cursor:pointer; transition:0.3s; position:relative; }
-.missao:hover { transform:translateY(-3px); }
-.ranking { display:flex; flex-direction:column; gap:10px; max-width:500px; margin:0 auto; }
-.aluno { padding:10px; border-radius:8px; background:#f9f9f9; display:flex; justify-content:space-between; transition:0.4s; }
-.aluno-destaque, .aluno-superacao { padding:15px; border-radius:12px; text-align:center; margin-bottom:20px; font-weight:bold; }
-.aluno-superacao { background:#e6c200; }
-@media(max-width:768px){.cards, .missoes { flex-direction:column; align-items:center; }.futuro-digital .container, .sobre-fundadora .container { flex-direction:column; }}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#f5f5f5;color:#333;line-height:1.6;}
+.container{max-width:1000px;margin:0 auto;padding:20px;}
+h2,h3,h4{color:#800000;margin-bottom:10px;}
+h2{text-align:center;margin-top:40px;font-size:2rem;}
+h3{font-size:1.5rem;margin-top:30px;}
+input, select, button{padding:10px 12px;border-radius:8px;border:none;margin:5px 0;font-size:1rem;}
+button,a{cursor:pointer;background:#FFD700;color:#800000;font-weight:bold;transition:0.3s;}
+button:hover,a:hover{background:#e6c200;}
+.aluno,.postagem,.aluno-destaque,.aluno-superacao,.missao{padding:10px;border-radius:8px;margin-bottom:10px;}
+.aluno{display:flex;justify-content:space-between;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+.aluno-destaque{background:#FFD700;font-weight:bold;text-align:center;}
+.aluno-superacao{background:#e6c200;font-weight:bold;text-align:center;}
+.mural .postagem{background:#fff3b0;border:1px solid #FFD700;}
+.missoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+.missao{background:#800000;color:#FFD700;flex:1 1 180px;text-align:center;cursor:pointer;transition:0.3s;}
+.missao:hover{transform:translateY(-3px);}
+.login-box{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.2);max-width:400px;margin:40px auto;}
+.login-box h2{text-align:center;margin-bottom:20px;}
+#plataforma{display:none;}
+.disciplinas-box{margin-bottom:20px;}
+.avaliacoes-box{margin-top:20px;}
 </style>
 </head>
 <body>
+<div class="container">
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" style="background:#800000;color:#FFD700;text-align:center;padding:60px 20px;">
 <h1>Aprender, criar e se conectar com a educação digital</h1>
 <p>Escola digital com raízes na comunidade e metodologia inovadora</p>
-<a href="#newsletter">Fique por dentro do lançamento</a>
 </section>
 
-<!-- PROJETO -->
+<!-- PROJETO EDUCACIONAL -->
 <section class="projeto-educacional container">
 <h2>Nosso Projeto Educacional</h2>
-<div class="cards">
-  <div class="card"><div class="icon">💻</div><h3>Tecnologia</h3><p>Recursos digitais e IA para aprendizado inovador.</p></div>
-  <div class="card"><div class="icon">🎨</div><h3>Arte</h3><p>Desenvolvimento criativo com linguagens artísticas.</p></div>
-  <div class="card"><div class="icon">🤝</div><h3>Cidadania</h3><p>Valores e cultura local para formar cidadãos conscientes.</p></div>
-  <div class="card"><div class="icon">📚</div><h3>Literatura</h3><p>Alfabetização e expressão para todas as idades.</p></div>
+<div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;">
+<div style="background:#800000;color:#FFD700;padding:20px;border-radius:12px;width:200px;text-align:center;">💻<h4>Tecnologia</h4>Recursos digitais e IA para aprendizado inovador.</div>
+<div style="background:#800000;color:#FFD700;padding:20px;border-radius:12px;width:200px;text-align:center;">🎨<h4>Arte</h4>Desenvolvimento criativo com linguagens artísticas.</div>
+<div style="background:#800000;color:#FFD700;padding:20px;border-radius:12px;width:200px;text-align:center;">🤝<h4>Cidadania</h4>Valores e cultura local para formar cidadãos conscientes.</div>
+<div style="background:#800000;color:#FFD700;padding:20px;border-radius:12px;width:200px;text-align:center;">📚<h4>Literatura</h4>Alfabetização e expressão para todas as idades.</div>
 </div>
 </section>
 
-<!-- FUTURO -->
-<section class="futuro-digital container">
-<div class="col"><img src="plataforma-mockup.png" alt="Mockup da plataforma"></div>
-<div class="col">
-<h2>Nosso Futuro Digital</h2>
-<p>Um espaço inovador, interativo e conectado com a comunidade, preparado para transformar a aprendizagem e integrar tecnologia e educação local.</p>
-<a href="#newsletter">Receba novidades</a>
-</div>
-</section>
-
-<!-- FUNDAORA -->
-<section class="sobre-fundadora container">
-<div class="col"><img src="fundadora .png" alt="Foto da fundadora"></div>
-<div class="col">
+<!-- FUNDADORA -->
+<section class="sobre-fundadora container" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;margin-top:40px;">
+<div style="flex:1 1 300px;"><img src="fundadora .png" alt="Fundadora" style="width:100%;border-radius:12px;"></div>
+<div style="flex:1 1 400px;">
 <h2>Sobre a Fundadora</h2>
 <p>Geizy Macedo é educadora e líder do Instituto Digital, com experiência em metodologias inovadoras e comprometimento com a comunidade rural.</p>
 <p>Transforma o ensino conectando tecnologia, arte e cidadania de forma humanizada e próxima das pessoas.</p>
-<a href="#newsletter">Fique por dentro</a>
 </div>
 </section>
 
 <!-- NEWSLETTER -->
-<section class="newsletter" id="newsletter">
-<div class="container">
+<section class="newsletter" style="background:#800000;color:#FFD700;text-align:center;padding:40px 20px;margin-top:40px;">
 <h2>Fique por dentro das novidades</h2>
 <p>Receba informações sobre o lançamento da plataforma e novos cursos.</p>
 <form>
-<input type="email" placeholder="Seu e-mail" required>
+<input type="email" placeholder="Seu e-mail">
 <button type="submit">Inscrever-se</button>
 </form>
-</div>
 </section>
 
-<!-- PLATAFORMA VISUAL -->
-<section class="plataforma container">
-<h2>🖥️ Plataforma Interna - Visualização</h2>
+<!-- LOGIN -->
+<div class="login-box" id="loginBox">
+<h2>Login</h2>
+<input type="text" id="codigoLogin" placeholder="Código do usuário">
+<input type="password" id="senhaLogin" placeholder="Senha">
+<button onclick="fazerLogin()">Entrar</button>
+<p id="loginErro" style="color:red;text-align:center;"></p>
+</div>
+
+<!-- PLATAFORMA INTERNA -->
+<div id="plataforma">
+
+<h2>🖥️ Plataforma Interna</h2>
 
 <h3>🏆 Aluno Destaque</h3>
 <div id="alunoDestaque" class="aluno-destaque"></div>
@@ -121,57 +95,86 @@ section { padding:60px 20px; }
 <div id="ranking"></div>
 
 <h3>Mural Digital</h3>
-<div id="mural">
-  <div class="postagem">Alice (6º Ano) postou: Projeto de Matemática</div>
-  <div class="postagem">Bruno (7º Ano) postou: Experimento de Ciências</div>
-  <div class="postagem">Carla (8º Ano) postou: Cartaz sobre Cidadania</div>
-  <div class="postagem">Daniel (9º Ano) postou: Texto de Literatura</div>
-</div>
+<div id="mural" class="mural"></div>
 
 <h3>Missões Semanais/Bimestrais</h3>
-<div class="missoes">
-  <div class="missao" data-pontos="10">🧠 Conhecimento</div>
-  <div class="missao" data-pontos="15">🎨 Criativo</div>
-  <div class="missao" data-pontos="10">📖 Leitura</div>
-  <div class="missao" data-pontos="5">🌱 Cidadania</div>
-  <div class="missao" data-pontos="20">📸 Prática</div>
-</div>
-</section>
+<div class="missoes" id="missoes"></div>
 
-<footer class="rodape">
-<p>© 2026 Instituto Digital Geizy Mac. Todos os direitos reservados.</p>
-<div class="social">
-<a href="https://www.instagram.com/seuperfil" target="_blank">Instagram</a> |
-<a href="https://www.facebook.com/seuperfil" target="_blank">Facebook</a> |
-<a href="https://www.linkedin.com/in/seuperfil" target="_blank">LinkedIn</a>
+<!-- Professores -->
+<div class="disciplinas-box" id="disciplinasBox" style="display:none;">
+<h3>📚 Disciplinas do Professor</h3>
+<select id="disciplinasSelect" multiple>
+<option>Matemática</option>
+<option>Ciências</option>
+<option>Arte</option>
+<option>Cidadania</option>
+<option>Literatura</option>
+</select>
+<button onclick="cadastrarDisciplinas()">Salvar Disciplinas</button>
+
+<h3>📝 Criar Avaliação Digital</h3>
+<input type="text" id="pergunta" placeholder="Pergunta">
+<input type="text" id="resposta" placeholder="Resposta correta">
+<button onclick="criarAvaliacao()">Criar Avaliação</button>
+
+<button onclick="exportarPDF()">📄 Exportar Avaliações em PDF</button>
 </div>
-</footer>
+
+</div>
 
 <script>
-// --- DADOS PARA VISUALIZAÇÃO ---
-const alunos = [
-  { nome:"Alice", pontos:20, medalhas:1, nivel:"Explorador", turma:"6º Ano" },
-  { nome:"Bruno", pontos:35, medalhas:2, nivel:"Criador", turma:"7º Ano" },
-  { nome:"Carla", pontos:10, medalhas:0, nivel:"Explorador", turma:"8º Ano" },
-  { nome:"Daniel", pontos:50, medalhas:3, nivel:"Mestre", turma:"9º Ano" }
+// --- DADOS SIMULADOS ---
+const usuarios = [
+  { tipo:"admin", nome:"Geizy", codigo:"ADM001", senha:"1234" },
+  { tipo:"professor", nome:"Prof. João", codigo:"PF001", senha:"1234", disciplinas:["Matemática"], turmas:["6º Ano","7º Ano"] },
+  { tipo:"aluno", nome:"Alice", codigo:"AL001", senha:"1234", turma:"6º Ano", pontos:20, medalhas:1 },
+  { tipo:"aluno", nome:"Bruno", codigo:"AL002", senha:"1234", turma:"7º Ano", pontos:35, medalhas:2 },
+  { tipo:"aluno", nome:"Carla", codigo:"AL003", senha:"1234", turma:"8º Ano", pontos:10, medalhas:0 },
+  { tipo:"aluno", nome:"Daniel", codigo:"AL004", senha:"1234", turma:"9º Ano", pontos:50, medalhas:3 }
+];
+
+let avaliacoes = [];
+const missoesData = [
+  { icone:"🧠", titulo:"Conhecimento", pontos:10 },
+  { icone:"🎨", titulo:"Criativo", pontos:15 },
+  { icone:"📖", titulo:"Leitura", pontos:10 },
+  { icone:"🌱", titulo:"Cidadania", pontos:5 },
+  { icone:"📸", titulo:"Prática", pontos:20 }
 ];
 
 // --- FUNÇÕES ---
+function fazerLogin(){
+  const codigo = document.getElementById("codigoLogin").value;
+  const senha = document.getElementById("senhaLogin").value;
+  const user = usuarios.find(u=>u.codigo===codigo && u.senha===senha);
+  const loginErro = document.getElementById("loginErro");
+  if(!user){ loginErro.textContent="Código ou senha incorretos"; return;}
+  document.getElementById("loginBox").style.display="none";
+  document.getElementById("plataforma").style.display="block";
+  loginErro.textContent="";
+  inicializarPlataforma(user);
+}
+
+function inicializarPlataforma(user){
+  renderRanking();
+  atualizarDestaques();
+  renderMural();
+  renderMissoes();
+  if(user.tipo==="professor") document.getElementById("disciplinasBox").style.display="block";
+}
+
 function renderRanking(){
   const rankingEl = document.getElementById("ranking");
-  rankingEl.innerHTML = "";
-  const turmas = ["6º Ano","7º Ano","8º Ano","9º Ano"];
-  turmas.forEach(turma=>{
-    const alunosTurma = alunos.filter(a=>a.turma===turma);
+  rankingEl.innerHTML="";
+  ["6º Ano","7º Ano","8º Ano","9º Ano"].forEach(turma=>{
+    const alunosTurma = usuarios.filter(a=>a.tipo==="aluno" && a.turma===turma);
     if(alunosTurma.length>0){
-      const titulo = document.createElement("h4");
-      titulo.textContent = turma;
+      const titulo = document.createElement("h4"); titulo.textContent = turma;
       rankingEl.appendChild(titulo);
-      alunosTurma.sort((a,b)=>b.pontos-a.pontos);
-      alunosTurma.forEach(aluno=>{
+      alunosTurma.sort((a,b)=>b.pontos-a.pontos).forEach(aluno=>{
         const div = document.createElement("div");
-        div.classList.add("aluno");
-        div.innerHTML = `<span>${aluno.nome} (${aluno.nivel})</span><span>${aluno.pontos} pts</span>`;
+        div.className="aluno";
+        div.innerHTML=`<span>${aluno.nome}</span><span>${aluno.pontos} pts</span>`;
         rankingEl.appendChild(div);
       });
     }
@@ -179,16 +182,61 @@ function renderRanking(){
 }
 
 function atualizarDestaques(){
-  const destaque = alunos.reduce((a,b)=> a.pontos>b.pontos?a:b);
+  const alunos = usuarios.filter(u=>u.tipo==="aluno");
+  const destaque = alunos.reduce((a,b)=>a.pontos>b.pontos?a:b);
   document.getElementById("alunoDestaque").textContent = `${destaque.nome} - ${destaque.pontos} pts`;
-  const superacao = alunos.reduce((a,b)=> a.pontos<b.pontos?a:b);
+  const superacao = alunos.reduce((a,b)=>a.pontos<b.pontos?a:b);
   document.getElementById("alunoSuperacao").textContent = `${superacao.nome} - ${superacao.pontos} pts`;
 }
 
-// Inicializa visualização
-renderRanking();
-atualizarDestaques();
-</script>
+function renderMural(){
+  const muralEl = document.getElementById("mural"); muralEl.innerHTML="";
+  usuarios.filter(u=>u.tipo==="aluno").forEach(a=>{
+    const div=document.createElement("div"); div.className="postagem";
+    div.textContent = `${a.nome} (${a.turma}) postou: trabalho de exemplo`;
+    muralEl.appendChild(div);
+  });
+}
 
+function renderMissoes(){
+  const missoesEl = document.getElementById("missoes"); missoesEl.innerHTML="";
+  missoesData.forEach(m=>{
+    const div=document.createElement("div"); div.className="missao";
+    div.innerHTML=`${m.icone} ${m.titulo} (${m.pontos} pts)`;
+    missoesEl.appendChild(div);
+  });
+}
+
+// Professores
+function cadastrarDisciplinas(){
+  const select=document.getElementById("disciplinasSelect");
+  const selecionadas=Array.from(select.selectedOptions).map(o=>o.value);
+  alert("Disciplinas cadastradas: "+selecionadas.join(", "));
+}
+
+function criarAvaliacao(){
+  const pergunta=document.getElementById("pergunta").value;
+  const resposta=document.getElementById("resposta").value;
+  if(pergunta && resposta){
+    avaliacoes.push({pergunta,resposta});
+    alert("Avaliação criada com correção automática!");
+    document.getElementById("pergunta").value="";
+    document.getElementById("resposta").value="";
+  } else alert("Preencha pergunta e resposta.");
+}
+
+// Exportar PDF
+function exportarPDF(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.setFontSize(16); doc.text("Avaliações e Resultados",20,20);
+  avaliacoes.forEach((a,i)=>{
+    doc.setFontSize(12);
+    doc.text(`${i+1}. Pergunta: ${a.pergunta}`,20,30+i*20);
+    doc.text(`   Resposta correta: ${a.resposta}`,20,35+i*20);
+  });
+  doc.save("avaliacoes_resultados.pdf");
+}
+</script>
 </body>
 </html>
