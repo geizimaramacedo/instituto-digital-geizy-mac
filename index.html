@@ -1,191 +1,221 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instituto Digital Geizy Mac</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; color:#333; }
-    header { background:#800000; color:#fff; padding:20px; text-align:center; }
-    section { padding:20px; max-width:900px; margin:0 auto; background:#fff; margin-bottom:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
-    h1,h2,h3 { color:#800000; }
-    img { max-width:100%; border-radius:10px; }
-    .input-group { margin-bottom:10px; }
-    .input-group label { display:block; margin-bottom:5px; }
-    .input-group input, .input-group select { width:100%; padding:8px; }
-    button { padding:10px 15px; background:#800000; color:#fff; border:none; border-radius:5px; cursor:pointer; }
-    .hidden { display:none; }
-    .mural-post { border-bottom:1px solid #ddd; padding:10px 0; }
-    .ranking, .destaque { display:flex; gap:15px; flex-wrap:wrap; }
-    .card { border:1px solid #ddd; border-radius:10px; padding:10px; width:calc(33% - 20px); background:#f9f9f9; }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>Instituto Digital Geizy Mac</h1>
-  <p>Aprender, criar e se conectar com a educação digital</p>
-</header>
-
-<section id="hero">
-  <h2>Nosso Projeto Educacional</h2>
-  <div>
-    <div>
-      <h3>💻 Tecnologia</h3>
-      <p>Recursos digitais e IA para aprendizado inovador.</p>
-    </div>
-    <div>
-      <h3>🎨 Arte</h3>
-      <p>Desenvolvimento criativo com linguagens artísticas.</p>
-    </div>
-    <div>
-      <h3>🤝 Cidadania</h3>
-      <p>Valores e cultura local para formar cidadãos conscientes.</p>
-    </div>
-    <div>
-      <h3>📚 Literatura</h3>
-      <p>Alfabetização e expressão para todas as idades.</p>
-    </div>
-  </div>
-</section>
-
-<section id="fundadora">
-  <h2>Sobre a Fundadora</h2>
-  <img src="fundadora.png" alt="Foto da Fundadora">
-  <p>Geizy Macedo é educadora e líder do Instituto Digital, com experiência em metodologias inovadoras e comprometimento com a comunidade rural.</p>
-</section>
-
-<section id="login-section">
-  <h2>Login do Usuário</h2>
-  <div class="input-group">
-    <label>Código ou Nome do Usuário</label>
-    <input type="text" id="login-code">
-  </div>
-  <div class="input-group">
-    <label>Senha</label>
-    <input type="password" id="login-pass">
-  </div>
-  <button onclick="loginUser()">Entrar</button>
-  <p id="login-msg" style="color:red;"></p>
-</section>
-
-<section id="plataforma" class="hidden">
-  <h2>Plataforma Interna</h2>
-
-  <h3>🏆 Ranking</h3>
-  <div class="ranking" id="ranking"></div>
-
-  <h3>🌟 Destaques</h3>
-  <div class="destaque" id="destaque"></div>
-
-  <h3>📝 Mural Digital</h3>
-  <div id="mural"></div>
-
-  <h3>🎯 Missões</h3>
-  <div id="missoes"></div>
-</section>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instituto Digital Geizy Macedo</title>
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-  // 🔹 CONFIGURAÇÃO FIREBASE
   const firebaseConfig = {
-    /* COLOQUE SUA CONFIGURAÇÃO AQUI */
+    apiKey: "SEU_API_KEY",
+    authDomain: "SEU_AUTH_DOMAIN",
+    projectId: "SEU_PROJECT_ID",
+    storageBucket: "SEU_STORAGE_BUCKET",
+    messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+    appId: "SEU_APP_ID"
   };
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
-
-  // 🔹 LOGIN
-  function loginUser() {
-    const code = document.getElementById('login-code').value;
-    const pass = document.getElementById('login-pass').value;
-    auth.signInWithEmailAndPassword(code + "@institutodigital.com", pass)
-      .then(() => {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('plataforma').classList.remove('hidden');
-        loadData();
-      })
-      .catch(err => {
-        document.getElementById('login-msg').innerText = "Código ou senha incorretos";
-      });
-  }
-
-  // 🔹 CARREGAR DADOS DA PLATAFORMA
-  async function loadData() {
-    // Ranking
-    const usersSnapshot = await db.collection('usuarios').orderBy('pontos','desc').get();
-    const rankingEl = document.getElementById('ranking');
-    rankingEl.innerHTML = "";
-    usersSnapshot.forEach(doc => {
-      const u = doc.data();
-      const div = document.createElement('div');
-      div.classList.add('card');
-      div.innerHTML = `<strong>${u.nome}</strong><br>Turma: ${u.turma}<br>Pontos: ${u.pontos}`;
-      rankingEl.appendChild(div);
-    });
-
-    // Destaques
-    const destaqueEl = document.getElementById('destaque');
-    destaqueEl.innerHTML = "";
-    usersSnapshot.forEach(doc => {
-      const u = doc.data();
-      if(u.destaque) {
-        const div = document.createElement('div');
-        div.classList.add('card');
-        div.innerHTML = `<strong>${u.nome}</strong><br>Destaque: ${u.destaque}`;
-        destaqueEl.appendChild(div);
-      }
-    });
-
-    // Mural
-    const muralSnap = await db.collection('mural').orderBy('data','desc').get();
-    const muralEl = document.getElementById('mural');
-    muralEl.innerHTML = "";
-    muralSnap.forEach(doc => {
-      const p = doc.data();
-      const div = document.createElement('div');
-      div.classList.add('mural-post');
-      div.innerHTML = `<strong>${p.autor}</strong> (${p.turma}): ${p.texto}`;
-      muralEl.appendChild(div);
-    });
-
-    // Missões
-    const missoesSnap = await db.collection('missoes').get();
-    const missoesEl = document.getElementById('missoes');
-    missoesEl.innerHTML = "";
-    missoesSnap.forEach(doc => {
-      const m = doc.data();
-      const div = document.createElement('div');
-      div.classList.add('card');
-      div.innerHTML = `<strong>${m.titulo}</strong><br>Descrição: ${m.descricao}<br>Pontos: ${m.pontos}`;
-      missoesEl.appendChild(div);
-    });
-  }
-
-  // 🔹 EXEMPLO DE CRIAÇÃO DE USUÁRIOS (apenas admin pode adicionar)
-  async function createUser(nome, codigo, senha, turma, tipo="aluno") {
-    await auth.createUserWithEmailAndPassword(codigo + "@institutodigital.com", senha);
-    await db.collection('usuarios').doc(codigo).set({ nome, codigo, turma, tipo, pontos:0, destaque:null });
-  }
-
-  // 🔹 EXPORTAR RESULTADOS EM PDF
-  function exportPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    const rankingEl = document.getElementById('ranking');
-    doc.text("Ranking de Alunos", 10, 10);
-    Array.from(rankingEl.children).forEach((c,i) => {
-      doc.text(c.innerText, 10, 20 + i*10);
-    });
-    doc.save("ranking.pdf");
-  }
-
 </script>
+<style>
+/* Adicione aqui seu CSS já aprovado */
+body { font-family: Arial, sans-serif; margin:0; padding:0; }
+section { padding: 20px; }
+</style>
+</head>
+<body>
 
+<!-- Hero e Projeto Educacional -->
+<section id="hero">
+  <h1>Aprender, criar e se conectar com a educação digital</h1>
+  <p>Escola digital com raízes na comunidade e metodologia inovadora</p>
+</section>
+
+<!-- Cadastro -->
+<section id="cadastro">
+<h2>Cadastro</h2>
+<form id="formCadastro">
+  <label>Tipo de Usuário:</label>
+  <select id="tipoUsuario">
+    <option value="aluno">Aluno</option>
+    <option value="professor">Professor</option>
+  </select><br>
+
+  <label>Código ou Nome:</label>
+  <input type="text" id="codigo" required><br>
+
+  <label>Nome Completo:</label>
+  <input type="text" id="nome" required><br>
+
+  <div id="campoTurma">
+    <label>Turma:</label>
+    <select id="turma">
+      <option value="6º Ano">6º Ano</option>
+      <option value="7º Ano">7º Ano</option>
+      <option value="8º Ano">8º Ano</option>
+      <option value="9º Ano">9º Ano</option>
+    </select>
+  </div>
+
+  <div id="campoDisciplina" style="display:none;">
+    <label>Disciplina:</label>
+    <input type="text" id="disciplina"><br>
+  </div>
+
+  <label>Senha:</label>
+  <input type="password" id="senha" required><br>
+
+  <button type="submit">Cadastrar</button>
+</form>
+<p id="msgCadastro"></p>
+</section>
+
+<!-- Login -->
+<section id="login">
+<h2>Login</h2>
+<form id="formLogin">
+  <label>Código ou Email:</label>
+  <input type="text" id="loginCodigo" required><br>
+  <label>Senha:</label>
+  <input type="password" id="loginSenha" required><br>
+  <button type="submit">Entrar</button>
+</form>
+<p id="msgLogin"></p>
+</section>
+
+<!-- Plataforma Interna -->
+<section id="plataforma" style="display:none;">
+<h2>Bem-vindo, <span id="nomeUsuario"></span></h2>
+<div id="ranking"></div>
+<div id="destaques"></div>
+<div id="mural"></div>
+<div id="missoes"></div>
+<button id="exportarPDF">Exportar Avaliações em PDF</button>
+</section>
+
+<script>
+// Admin pré-cadastrado
+const usuarios = [
+  { tipo: "admin", nome: "Geizy Macedo", codigo: "ADM001", senha: "1234", pontos: 0, destaque: false }
+];
+
+// Toggle campos de cadastro
+document.getElementById('tipoUsuario').addEventListener('change', function() {
+  if(this.value === 'aluno') {
+    document.getElementById('campoTurma').style.display='block';
+    document.getElementById('campoDisciplina').style.display='none';
+  } else {
+    document.getElementById('campoTurma').style.display='none';
+    document.getElementById('campoDisciplina').style.display='block';
+  }
+});
+
+// Cadastro
+document.getElementById('formCadastro').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const tipo = document.getElementById('tipoUsuario').value;
+  const codigo = document.getElementById('codigo').value;
+  const nome = document.getElementById('nome').value;
+  const senha = document.getElementById('senha').value;
+  const turma = tipo==='aluno'?document.getElementById('turma').value:'';
+  const disciplina = tipo==='professor'?document.getElementById('disciplina').value:'';
+
+  try {
+    // Criar usuário no Firebase Auth
+    const emailFake = codigo + '@institutodigital.com';
+    await auth.createUserWithEmailAndPassword(emailFake, senha);
+
+    // Salvar no Firestore
+    await db.collection('usuarios').doc(codigo).set({ nome, codigo, senha, tipo, turma, disciplina, pontos:0, destaque:false });
+
+    document.getElementById('msgCadastro').innerText='Cadastro realizado com sucesso!';
+    this.reset();
+  } catch(err){
+    document.getElementById('msgCadastro').innerText='Erro: '+err.message;
+  }
+});
+
+// Login
+document.getElementById('formLogin').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const codigo = document.getElementById('loginCodigo').value;
+  const senha = document.getElementById('loginSenha').value;
+
+  try {
+    const emailFake = codigo + '@institutodigital.com';
+    await auth.signInWithEmailAndPassword(emailFake, senha);
+
+    // Buscar dados do Firestore
+    const doc = await db.collection('usuarios').doc(codigo).get();
+    if(doc.exists){
+      const usuario = doc.data();
+      document.getElementById('nomeUsuario').innerText = usuario.nome;
+      document.getElementById('login').style.display='none';
+      document.getElementById('cadastro').style.display='none';
+      document.getElementById('plataforma').style.display='block';
+      carregarPlataforma(usuario);
+    }
+  } catch(err){
+    document.getElementById('msgLogin').innerText='Código ou senha incorretos';
+  }
+});
+
+// Função para carregar plataforma
+async function carregarPlataforma(usuario){
+  // Ranking
+  const snapshot = await db.collection('usuarios').get();
+  let rankingHTML='<h3>Ranking</h3><ol>';
+  snapshot.forEach(doc=>{
+    const u=doc.data();
+    rankingHTML+=`<li>${u.nome} - ${u.pontos} pontos</li>`;
+  });
+  rankingHTML+='</ol>';
+  document.getElementById('ranking').innerHTML=rankingHTML;
+
+  // Destaques
+  let destaqueHTML='<h3>Destaques</h3>';
+  snapshot.forEach(doc=>{
+    const u=doc.data();
+    if(u.destaque) destaqueHTML+=`<p>${u.nome}</p>`;
+  });
+  document.getElementById('destaques').innerHTML=destaqueHTML;
+
+  // Mural
+  const muralSnapshot = await db.collection('mural').get();
+  let muralHTML='<h3>Mural</h3>';
+  muralSnapshot.forEach(doc=>{
+    const p=doc.data();
+    muralHTML+=`<p><strong>${p.autor} (${p.turma}):</strong> ${p.texto}</p>`;
+  });
+  document.getElementById('mural').innerHTML=muralHTML;
+
+  // Missões
+  const missoesSnapshot = await db.collection('missoes').get();
+  let missoesHTML='<h3>Missões</h3><ul>';
+  missoesSnapshot.forEach(doc=>{
+    const m=doc.data();
+    missoesHTML+=`<li>${m.titulo} - ${m.pontos} pts</li>`;
+  });
+  missoesHTML+='</ul>';
+  document.getElementById('missoes').innerHTML=missoesHTML;
+}
+
+// Exportar PDF (simples, com jsPDF)
+document.getElementById('exportarPDF').addEventListener('click', async function(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.text('Ranking e Missões',10,10);
+  const rankingText = document.getElementById('ranking').innerText;
+  const missoesText = document.getElementById('missoes').innerText;
+  doc.text(rankingText,10,20);
+  doc.text(missoesText,10,40);
+  doc.save('avaliacoes.pdf');
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
