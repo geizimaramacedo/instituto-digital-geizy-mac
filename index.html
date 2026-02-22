@@ -8,10 +8,17 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
 body { background:#fff; color:#333; line-height:1.6; }
 a { text-decoration:none; }
+
+/* Botões globais */
 a, button {
   text-decoration: none;
   color: #800000;
@@ -23,12 +30,29 @@ a, button {
   display: inline-block;
   cursor: pointer;
 }
-a:hover, button:hover { background-color: #e6c200; transform: translateY(-3px); }
+a:hover, button:hover {
+  background-color: #e6c200;
+  transform: translateY(-3px);
+}
+
+/* Seções públicas */
 section { padding:60px 20px; }
 .container { max-width:1000px; margin:0 auto; }
 
-/* Hero */
-.hero { background-color: #800000; background-image: url('hero-image.png'); background-size: cover; background-position: center; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #FFD700; padding: 0 20px; }
+.hero {
+  background-color: #800000;
+  background-image: url('hero-image.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #FFD700;
+  padding: 0 20px;
+}
 .hero h1 { font-size:3rem; margin-bottom:20px; }
 .hero p { font-size:1.5rem; margin-bottom:30px; }
 
@@ -66,18 +90,36 @@ section { padding:60px 20px; }
 .rodape .social a { color:#800000; margin:0 5px; transition:0.3s; }
 .rodape .social a:hover { color:#e6c200; }
 
-/* Formulários e painéis */
-.admin-form, .login-form, .painel-admin, .painel-professor, .painel-aluno { max-width:600px; margin:40px auto; padding:20px; border-radius:12px; background:#FFD700; color:#800000; display:none; }
-.admin-form input, .login-form input, .painel-admin input, .painel-professor input { width:100%; margin-bottom:10px; padding:10px; border-radius:8px; border:1px solid #800000; }
-.admin-form button, .login-form button, .painel-admin button, .painel-professor button { margin-top:10px; }
-
-/* Painéis internos */
-.mural, .missoes { display:flex; flex-direction:column; gap:20px; margin-bottom:40px; }
+/* Protótipo Plataforma Interna */
+.plataforma { background:#f5f5f5; }
+.plataforma h2 { margin-bottom:30px; text-align:center; }
+.mural { display:flex; flex-direction:column; gap:20px; margin-bottom:40px; }
 .postagem { border:1px solid #800000; border-radius:10px; padding:15px; background:#FFD700; }
+.missoes { display:flex; flex-wrap:wrap; gap:15px; margin-bottom:30px; justify-content:center; }
 .missao { background:#800000; color:#FFD700; padding:15px; border-radius:10px; flex:1 1 180px; text-align:center; cursor:pointer; transition:0.3s; position:relative; }
 .missao:hover { transform:translateY(-3px); }
-.missao .medalha { position:absolute; top:-10px; right:-10px; background:#FFD700; color:#800000; font-weight:bold; border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; animation: pulse 0.6s ease; }
-@keyframes pulse { 0% { transform: scale(0.5); opacity:0; } 50% { transform: scale(1.2); opacity:1; } 100% { transform: scale(1); opacity:1; } }
+
+/* Medalhas */
+.missao .medalha {
+  position:absolute;
+  top:-10px;
+  right:-10px;
+  background:#FFD700;
+  color:#800000;
+  font-weight:bold;
+  border-radius:50%;
+  width:30px;
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation: pulse 0.6s ease;
+}
+@keyframes pulse {
+  0% { transform: scale(0.5); opacity:0; }
+  50% { transform: scale(1.2); opacity:1; }
+  100% { transform: scale(1); opacity:1; }
+}
 
 .ranking { display:flex; flex-direction:column; gap:10px; max-width:500px; margin:0 auto; }
 .aluno { padding:10px; border-radius:8px; background:#f9f9f9; display:flex; justify-content:space-between; transition:0.4s; }
@@ -85,12 +127,17 @@ section { padding:60px 20px; }
 .aluno.superacao { background:#e6c200; font-weight:bold; }
 
 /* Responsivo */
-@media(max-width:768px){ .cards { flex-direction:column; align-items:center; } .futuro-digital .container, .sobre-fundadora .container { flex-direction:column; } .missoes { flex-direction:column; } }
+@media(max-width:768px){
+  .cards { flex-direction:column; align-items:center; }
+  .futuro-digital .container,
+  .sobre-fundadora .container { flex-direction:column; }
+  .missoes { flex-direction:column; }
+}
 </style>
 </head>
 <body>
 
-<!-- Seções públicas -->
+<!-- Página pública -->
 <section class="hero">
 <h1>Aprender, criar e se conectar com a educação digital</h1>
 <p>Escola digital com raízes na comunidade e metodologia inovadora</p>
@@ -100,15 +147,33 @@ section { padding:60px 20px; }
 <section class="projeto-educacional container">
 <h2>Nosso Projeto Educacional</h2>
 <div class="cards">
-  <div class="card"><div class="icon">💻</div><h3>Tecnologia</h3><p>Recursos digitais e IA para aprendizado inovador.</p></div>
-  <div class="card"><div class="icon">🎨</div><h3>Arte</h3><p>Desenvolvimento criativo com linguagens artísticas.</p></div>
-  <div class="card"><div class="icon">🤝</div><h3>Cidadania</h3><p>Valores e cultura local para formar cidadãos conscientes.</p></div>
-  <div class="card"><div class="icon">📚</div><h3>Literatura</h3><p>Alfabetização e expressão para todas as idades.</p></div>
+  <div class="card">
+    <div class="icon">💻</div>
+    <h3>Tecnologia</h3>
+    <p>Recursos digitais e IA para aprendizado inovador.</p>
+  </div>
+  <div class="card">
+    <div class="icon">🎨</div>
+    <h3>Arte</h3>
+    <p>Desenvolvimento criativo com linguagens artísticas.</p>
+  </div>
+  <div class="card">
+    <div class="icon">🤝</div>
+    <h3>Cidadania</h3>
+    <p>Valores e cultura local para formar cidadãos conscientes.</p>
+  </div>
+  <div class="card">
+    <div class="icon">📚</div>
+    <h3>Literatura</h3>
+    <p>Alfabetização e expressão para todas as idades.</p>
+  </div>
 </div>
 </section>
 
 <section class="futuro-digital container">
-<div class="col"><img src="plataforma-mockup.png" alt="Mockup da plataforma"></div>
+<div class="col">
+<img src="plataforma-mockup.png" alt="Mockup da plataforma">
+</div>
 <div class="col">
 <h2>Nosso Futuro Digital</h2>
 <p>Um espaço inovador, interativo e conectado com a comunidade, preparado para transformar a aprendizagem e integrar tecnologia e educação local.</p>
@@ -117,7 +182,9 @@ section { padding:60px 20px; }
 </section>
 
 <section class="sobre-fundadora container">
-<div class="col"><img src="fundadora.png" alt="Foto da fundadora"></div>
+<div class="col">
+<img src="fundadora .png" alt="Foto da fundadora">
+</div>
 <div class="col">
 <h2>Sobre a Fundadora</h2>
 <p>Geizy Macedo é educadora e líder do Instituto Digital, com experiência em metodologias inovadoras e comprometimento com a comunidade rural.</p>
@@ -130,141 +197,168 @@ section { padding:60px 20px; }
 <div class="container">
 <h2>Fique por dentro das novidades</h2>
 <p>Receba informações sobre o lançamento da plataforma e novos cursos.</p>
-<form>
-<input type="email" placeholder="Seu e-mail" required>
-<button type="submit">Inscrever-se</button>
+<form id="newsletterForm">
+  <input type="email" placeholder="Seu e-mail" required>
+  <button type="submit">Inscrever-se</button>
 </form>
 </div>
 </section>
 
-<!-- FORMULÁRIOS E PAINÉIS -->
-<section class="admin-form" id="adminForm">
-<h2>Cadastre o Admin</h2>
-<input type="text" id="adminNome" placeholder="Nome completo">
-<input type="email" id="adminEmail" placeholder="Email">
-<input type="password" id="adminSenha" placeholder="Senha">
-<button id="btnCriarAdmin">Criar Admin</button>
-</section>
+<!-- Plataforma Interna -->
+<section class="plataforma container">
+<h2>🖥️ Plataforma Digital</h2>
 
-<section class="login-form" id="loginForm">
-<h2>Login</h2>
-<input type="email" id="loginEmail" placeholder="Email">
+<!-- Login -->
+<div id="loginSection">
+<h3>Login do Aluno/Professor/Admin</h3>
+<input type="text" id="loginCodigo" placeholder="Código do usuário">
 <input type="password" id="loginSenha" placeholder="Senha">
 <button id="btnLogin">Entrar</button>
-</section>
+<p id="loginMsg" style="color:red;"></p>
+</div>
 
-<section class="painel-admin" id="painelAdmin">
-<h2>Painel Admin</h2>
-<h3>Cadastrar Professores</h3>
-<input type="text" id="nomeProf" placeholder="Nome do professor">
-<input type="email" id="emailProf" placeholder="Email do professor">
-<input type="password" id="senhaProf" placeholder="Senha">
-<button id="btnCadastrarProf">Cadastrar Professor</button>
+<!-- Mural -->
+<h3>Mural Digital</h3>
+<div class="mural" id="mural"></div>
 
-<h3>Cadastrar Alunos</h3>
-<input type="text" id="nomeAluno" placeholder="Nome do aluno">
-<input type="email" id="emailAluno" placeholder="Email do aluno">
-<input type="password" id="senhaAluno" placeholder="Senha">
-<button id="btnCadastrarAluno">Cadastrar Aluno</button>
+<!-- Missões -->
+<h3>Missões Semanais</h3>
+<div class="missoes" id="missoes"></div>
 
+<!-- Ranking -->
 <h3>Ranking de Alunos</h3>
-<div class="ranking" id="rankingAdmin"></div>
+<div class="ranking" id="ranking"></div>
+
+<!-- Botão PDF para professores -->
+<button id="btnPDF" style="display:none;">Salvar Avaliações em PDF</button>
 </section>
 
-<section class="painel-professor" id="painelProfessor">
-<h2>Painel Professor</h2>
-<h3>Cadastrar Disciplina</h3>
-<input type="text" id="nomeDisciplina" placeholder="Nome da disciplina">
-<button id="btnCadastrarDisciplina">Cadastrar Disciplina</button>
-<h3>Suas Disciplinas</h3>
-<div id="disciplinasProfessor"></div>
-</section>
-
-<section class="painel-aluno" id="painelAluno">
-<h2>Painel Aluno</h2>
-<div class="mural" id="muralAluno"></div>
-<div class="missoes" id="missoesAluno"></div>
-<div class="ranking" id="rankingAluno"></div>
-</section>
-
+<!-- Rodapé -->
 <footer class="rodape">
 <p>© 2026 Instituto Digital Geizy Mac. Todos os direitos reservados.</p>
 <div class="social">
-<a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">LinkedIn</a>
+<a href="https://www.instagram.com/seuperfil" target="_blank">Instagram</a> |
+<a href="https://www.facebook.com/seuperfil" target="_blank">Facebook</a> |
+<a href="https://www.linkedin.com/in/seuperfil" target="_blank">LinkedIn</a>
 </div>
 </footer>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
 <script>
-document.addEventListener("DOMContentLoaded", ()=>{
-const firebaseConfig = {apiKey:"SEU_API_KEY", authDomain:"SEU_AUTH_DOMAIN", projectId:"SEU_PROJECT_ID", storageBucket:"SEU_STORAGE_BUCKET", messagingSenderId:"SEU_MESSAGING_ID", appId:"SEU_APP_ID"};
+/* ====== CONFIGURAÇÃO DO FIREBASE ====== */
+/* COLOQUE SUA CONFIGURAÇÃO REAL AQUI */
+const firebaseConfig = {
+  apiKey: "SEU_API_KEY",
+  authDomain: "SEU_AUTH_DOMAIN",
+  projectId: "SEU_PROJECT_ID",
+  storageBucket: "SEU_STORAGE_BUCKET",
+  messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+  appId: "SEU_APP_ID"
+};
 firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 const db = firebase.firestore();
-let usuarioAtual = null;
 
-// Verifica Admin
-db.collection("usuarios").where("tipo","==","admin").get().then(snap=>{
-  if(snap.empty) document.getElementById("adminForm").style.display="block";
-  else document.getElementById("loginForm").style.display="block";
-});
+/* ====== DADOS INICIAIS ====== */
+const muralData = [
+  { autor:"Escola", turma:"Todos", texto:"Aula de artes nesta quinta-feira será ao ar livre.", data:"22/02/2026" },
+  { autor:"Escola", turma:"Todos", texto:"Exposição de desenhos dos alunos da turma 4º ano.", data:"21/02/2026" },
+  { autor:"Escola", turma:"Todos", texto:"Feira de Ciências será na próxima semana.", data:"20/02/2026" }
+];
+const missoesData = [
+  { titulo:"🧠 Conhecimento", pontos:10 },
+  { titulo:"🎨 Criativo", pontos:15 },
+  { titulo:"📖 Leitura", pontos:10 },
+  { titulo:"🌱 Cidadania", pontos:5 },
+  { titulo:"📸 Prática", pontos:20 }
+];
 
-// Criar Admin
-document.getElementById("btnCriarAdmin").addEventListener("click", ()=>{
-  const n=document.getElementById("adminNome").value;
-  const e=document.getElementById("adminEmail").value;
-  const s=document.getElementById("adminSenha").value;
-  if(n&&e&&s){ db.collection("usuarios").add({nome:n,email:e,senha:s,tipo:"admin"}).then(()=>{
-    alert("Admin criado! Faça login");
-    document.getElementById("adminForm").style.display="none";
-    document.getElementById("loginForm").style.display="block";
-    document.getElementById("adminNome").value="";
-    document.getElementById("adminEmail").value="";
-    document.getElementById("adminSenha").value="";
-  }); }else alert("Preencha todos os campos");
-});
+/* ====== FUNÇÕES DE RENDER ====== */
+const mural = document.getElementById("mural");
+const missoes = document.getElementById("missoes");
+const rankingEl = document.getElementById("ranking");
+const btnPDF = document.getElementById("btnPDF");
 
-// Login
-document.getElementById("btnLogin").addEventListener("click", ()=>{
-  const e=document.getElementById("loginEmail").value;
-  const s=document.getElementById("loginSenha").value;
-  db.collection("usuarios").where("email","==",e).where("senha","==",s).get().then(snap=>{
-    if(snap.empty) alert("Usuário ou senha incorretos");
-    else snap.forEach(doc=>{
-      usuarioAtual={id:doc.id,...doc.data()};
-      document.getElementById("loginForm").style.display="none";
-      if(usuarioAtual.tipo==="admin") mostrarPainelAdmin(usuarioAtual);
-      else if(usuarioAtual.tipo==="professor") mostrarPainelProfessor(usuarioAtual);
-      else mostrarPainelAluno(usuarioAtual);
-    });
-  });
-});
-
-// Funções de painel
-function mostrarPainelAdmin(admin){document.getElementById("painelAdmin").style.display="block"; carregarRanking("rankingAdmin");}
-function mostrarPainelProfessor(prof){document.getElementById("painelProfessor").style.display="block";}
-function mostrarPainelAluno(aluno){document.getElementById("painelAluno").style.display="block";}
-
-// Ranking Admin
-function carregarRanking(id){
-  const rankingEl=document.getElementById(id);
-  db.collection("usuarios").where("tipo","==","aluno").get().then(snap=>{
-    rankingEl.innerHTML="";
-    let alunos=[];
-    snap.forEach(doc=>alunos.push({...doc.data(),id:doc.id}));
-    alunos.sort((a,b)=>b.pontos-a.pontos);
-    alunos.forEach((a,i)=>{
-      const div=document.createElement("div");
-      div.classList.add("aluno");
-      if(i===0) div.classList.add("destaque");
-      if(a.pontos<=10) div.classList.add("superacao");
-      div.innerHTML=`<span>${a.nome}</span><span>${a.pontos || 0} pts</span>`;
-      rankingEl.appendChild(div);
-    });
+function renderMural(){
+  mural.innerHTML="";
+  muralData.forEach(post=>{
+    const div = document.createElement("div");
+    div.classList.add("postagem");
+    div.innerHTML=`<strong>${post.autor}</strong> (${post.turma})<p>${post.texto}</p><small>${post.data}</small>`;
+    mural.appendChild(div);
   });
 }
+renderMural();
+
+function renderMissoes(alunos){
+  missoes.innerHTML="";
+  missoesData.forEach(missao=>{
+    const div = document.createElement("div");
+    div.classList.add("missao");
+    div.dataset.pontos=missao.pontos;
+    div.textContent = missao.titulo;
+    div.addEventListener("click",()=>{
+      // Escolhe aluno aleatório
+      const aluno = alunos[Math.floor(Math.random()*alunos.length)];
+      aluno.pontos += missao.pontos;
+      alert(`${aluno.nome} completou a missão "${missao.titulo}" e ganhou ${missao.pontos} pontos!`);
+      renderRanking(alunos);
+    });
+    missoes.appendChild(div);
+  });
+}
+
+function renderRanking(alunos){
+  rankingEl.innerHTML="";
+  alunos.sort((a,b)=>b.pontos-a.pontos);
+  alunos.forEach((aluno,index)=>{
+    const div=document.createElement("div");
+    div.classList.add("aluno");
+    if(index===0) div.classList.add("destaque");
+    if(aluno.pontos<=10) div.classList.add("superacao");
+    div.innerHTML=`<span>${aluno.nome}</span><span>${aluno.pontos} pts</span>`;
+    rankingEl.appendChild(div);
+  });
+}
+
+/* ====== LOGIN ====== */
+const loginCodigo = document.getElementById("loginCodigo");
+const loginSenha = document.getElementById("loginSenha");
+const loginMsg = document.getElementById("loginMsg");
+const btnLogin = document.getElementById("btnLogin");
+
+btnLogin.addEventListener("click",()=>{
+  const codigo = loginCodigo.value.trim();
+  const senha = loginSenha.value.trim();
+  if(!codigo || !senha){ loginMsg.textContent="Digite código e senha"; return; }
+  // Busca usuário no Firestore
+  db.collection("usuarios").where("codigo","==",codigo).get().then(snapshot=>{
+    if(snapshot.empty){ loginMsg.textContent="Código ou senha incorretos"; return; }
+    snapshot.forEach(doc=>{
+      const data = doc.data();
+      if(data.senha !== senha){ loginMsg.textContent="Código ou senha incorretos"; return; }
+      loginMsg.textContent="";
+      alert(`Bem-vindo(a) ${data.nome}!`);
+      // Mostra PDF botão se for professor
+      if(data.tipo==="professor") btnPDF.style.display="inline-block";
+      // Renderiza Missões e Ranking
+      db.collection("usuarios").get().then(all=>{
+        const alunos=[];
+        all.forEach(d=>{
+          const u = d.data();
+          if(u.tipo==="aluno") alunos.push(u);
+        });
+        renderRanking(alunos);
+        renderMissoes(alunos);
+      });
+    });
+  });
+});
+
+/* ====== BOTÃO PDF ====== */
+btnPDF.addEventListener("click",()=>{
+  alert("PDF gerado com os resultados das avaliações!");
+});
 </script>
+
 </body>
 </html>
