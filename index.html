@@ -8,11 +8,6 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
 body { background:#fff; color:#333; line-height:1.6; }
@@ -30,15 +25,13 @@ a, button {
   display: inline-block;
   cursor: pointer;
 }
-a:hover, button:hover {
-  background-color: #e6c200;
-  transform: translateY(-3px);
-}
+a:hover, button:hover { background-color: #e6c200; transform: translateY(-3px); }
 
 /* Seções públicas */
 section { padding:60px 20px; }
 .container { max-width:1000px; margin:0 auto; }
 
+/* Hero */
 .hero {
   background-color: #800000;
   background-image: url('hero-image.png');
@@ -126,6 +119,11 @@ section { padding:60px 20px; }
 .aluno.destaque { background:#FFD700; font-weight:bold; }
 .aluno.superacao { background:#e6c200; font-weight:bold; }
 
+/* Form Admin */
+.admin-form { display:flex; flex-direction:column; gap:15px; max-width:400px; margin:40px auto; padding:20px; border:2px solid #800000; border-radius:12px; background:#FFD700; color:#800000; }
+.admin-form input { padding:10px; border-radius:8px; border:1px solid #800000; }
+.admin-form button { margin-top:10px; }
+
 /* Responsivo */
 @media(max-width:768px){
   .cards { flex-direction:column; align-items:center; }
@@ -197,40 +195,40 @@ section { padding:60px 20px; }
 <div class="container">
 <h2>Fique por dentro das novidades</h2>
 <p>Receba informações sobre o lançamento da plataforma e novos cursos.</p>
-<form id="newsletterForm">
+<form>
   <input type="email" placeholder="Seu e-mail" required>
   <button type="submit">Inscrever-se</button>
 </form>
 </div>
 </section>
 
-<!-- Plataforma Interna -->
-<section class="plataforma container">
-<h2>🖥️ Plataforma Digital</h2>
+<!-- Tela cadastro Admin -->
+<section class="admin-form" id="adminForm" style="display:none;">
+<h2>Cadastro do Admin</h2>
+<input type="text" id="adminNome" placeholder="Nome completo" required>
+<input type="text" id="adminCodigo" placeholder="Código (ex: ADM001)" required>
+<input type="password" id="adminSenha" placeholder="Senha" required>
+<button id="btnCriarAdmin">Criar Admin</button>
+</section>
 
-<!-- Login -->
-<div id="loginSection">
-<h3>Login do Aluno/Professor/Admin</h3>
-<input type="text" id="loginCodigo" placeholder="Código do usuário">
-<input type="password" id="loginSenha" placeholder="Senha">
-<button id="btnLogin">Entrar</button>
-<p id="loginMsg" style="color:red;"></p>
-</div>
+<!-- Protótipo funcional da plataforma interna -->
+<section class="plataforma container" id="plataforma" style="display:none;">
+<h2>🖥️ Protótipo Plataforma Interna</h2>
 
-<!-- Mural -->
 <h3>Mural Digital</h3>
 <div class="mural" id="mural"></div>
 
-<!-- Missões -->
 <h3>Missões Semanais</h3>
-<div class="missoes" id="missoes"></div>
+<div class="missoes" id="missoes">
+  <div class="missao" data-pontos="10">🧠 Conhecimento</div>
+  <div class="missao" data-pontos="15">🎨 Criativo</div>
+  <div class="missao" data-pontos="10">📖 Leitura</div>
+  <div class="missao" data-pontos="5">🌱 Cidadania</div>
+  <div class="missao" data-pontos="20">📸 Prática</div>
+</div>
 
-<!-- Ranking -->
 <h3>Ranking de Alunos</h3>
 <div class="ranking" id="ranking"></div>
-
-<!-- Botão PDF para professores -->
-<button id="btnPDF" style="display:none;">Salvar Avaliações em PDF</button>
 </section>
 
 <!-- Rodapé -->
@@ -243,121 +241,111 @@ section { padding:60px 20px; }
 </div>
 </footer>
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 <script>
-/* ====== CONFIGURAÇÃO DO FIREBASE ====== */
-/* COLOQUE SUA CONFIGURAÇÃO REAL AQUI */
+// 🔹 COLOQUE SUA CONFIGURAÇÃO DO FIREBASE AQUI
 const firebaseConfig = {
   apiKey: "SEU_API_KEY",
   authDomain: "SEU_AUTH_DOMAIN",
   projectId: "SEU_PROJECT_ID",
   storageBucket: "SEU_STORAGE_BUCKET",
-  messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+  messagingSenderId: "SEU_MESSAGING_ID",
   appId: "SEU_APP_ID"
 };
 firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
 const db = firebase.firestore();
 
-/* ====== DADOS INICIAIS ====== */
-const muralData = [
-  { autor:"Escola", turma:"Todos", texto:"Aula de artes nesta quinta-feira será ao ar livre.", data:"22/02/2026" },
-  { autor:"Escola", turma:"Todos", texto:"Exposição de desenhos dos alunos da turma 4º ano.", data:"21/02/2026" },
-  { autor:"Escola", turma:"Todos", texto:"Feira de Ciências será na próxima semana.", data:"20/02/2026" }
-];
-const missoesData = [
-  { titulo:"🧠 Conhecimento", pontos:10 },
-  { titulo:"🎨 Criativo", pontos:15 },
-  { titulo:"📖 Leitura", pontos:10 },
-  { titulo:"🌱 Cidadania", pontos:5 },
-  { titulo:"📸 Prática", pontos:20 }
-];
+// Verifica se já existe Admin cadastrado
+db.collection("usuarios").where("tipo","==","admin").get().then(snapshot=>{
+  if(snapshot.empty){
+    document.getElementById("adminForm").style.display="block";
+  } else {
+    document.getElementById("plataforma").style.display="block";
+    carregarDados();
+  }
+});
 
-/* ====== FUNÇÕES DE RENDER ====== */
-const mural = document.getElementById("mural");
-const missoes = document.getElementById("missoes");
-const rankingEl = document.getElementById("ranking");
-const btnPDF = document.getElementById("btnPDF");
+// Criar Admin
+document.getElementById("btnCriarAdmin").addEventListener("click",()=>{
+  const nome = document.getElementById("adminNome").value;
+  const codigo = document.getElementById("adminCodigo").value;
+  const senha = document.getElementById("adminSenha").value;
+  if(nome && codigo && senha){
+    db.collection("usuarios").add({
+      nome, codigo, senha, tipo:"admin", pontos:0, destaque:false
+    }).then(()=>{
+      alert("Admin criado com sucesso!");
+      document.getElementById("adminForm").style.display="none";
+      document.getElementById("plataforma").style.display="block";
+      carregarDados();
+    });
+  } else alert("Preencha todos os campos!");
+});
 
-function renderMural(){
+// Funções de renderização da plataforma
+function carregarDados(){
+  // Dados simulados
+  const alunos = [
+    { nome:"Ana", pontos:50 },
+    { nome:"Bruno", pontos:40 },
+    { nome:"Carla", pontos:30 },
+    { nome:"Daniel", pontos:20 },
+    { nome:"Eva", pontos:10 }
+  ];
+
+  const muralData = [
+    { titulo:"Comunicado da Escola", conteudo:"Aula de artes nesta quinta-feira será ao ar livre." },
+    { titulo:"Projeto Cultural", conteudo:"Exposição de desenhos dos alunos da turma 4º ano." },
+    { titulo:"Evento", conteudo:"Feira de Ciências será na próxima semana." }
+  ];
+
+  // Renderiza mural
+  const mural = document.getElementById("mural");
   mural.innerHTML="";
-  muralData.forEach(post=>{
+  muralData.forEach(post => {
     const div = document.createElement("div");
     div.classList.add("postagem");
-    div.innerHTML=`<strong>${post.autor}</strong> (${post.turma})<p>${post.texto}</p><small>${post.data}</small>`;
+    div.innerHTML = `<h3>${post.titulo}</h3><p>${post.conteudo}</p>`;
     mural.appendChild(div);
   });
-}
-renderMural();
 
-function renderMissoes(alunos){
-  missoes.innerHTML="";
-  missoesData.forEach(missao=>{
-    const div = document.createElement("div");
-    div.classList.add("missao");
-    div.dataset.pontos=missao.pontos;
-    div.textContent = missao.titulo;
-    div.addEventListener("click",()=>{
-      // Escolhe aluno aleatório
+  // Renderiza ranking
+  const rankingEl = document.getElementById("ranking");
+  function renderRanking(){
+    rankingEl.innerHTML = "";
+    alunos.sort((a,b)=>b.pontos-a.pontos);
+    alunos.forEach((aluno,index)=>{
+      const div = document.createElement("div");
+      div.classList.add("aluno");
+      if(index===0) div.classList.add("destaque");
+      if(aluno.pontos<=10) div.classList.add("superacao");
+      div.innerHTML = `<span>${aluno.nome}</span><span>${aluno.pontos} pts</span>`;
+      rankingEl.appendChild(div);
+    });
+  }
+  renderRanking();
+
+  // Missões interativas com medalhas
+  const missoes = document.querySelectorAll(".missao");
+  missoes.forEach(missao=>{
+    missao.addEventListener("click",()=>{
+      const pontos = parseInt(missao.dataset.pontos);
       const aluno = alunos[Math.floor(Math.random()*alunos.length)];
-      aluno.pontos += missao.pontos;
-      alert(`${aluno.nome} completou a missão "${missao.titulo}" e ganhou ${missao.pontos} pontos!`);
-      renderRanking(alunos);
-    });
-    missoes.appendChild(div);
-  });
-}
-
-function renderRanking(alunos){
-  rankingEl.innerHTML="";
-  alunos.sort((a,b)=>b.pontos-a.pontos);
-  alunos.forEach((aluno,index)=>{
-    const div=document.createElement("div");
-    div.classList.add("aluno");
-    if(index===0) div.classList.add("destaque");
-    if(aluno.pontos<=10) div.classList.add("superacao");
-    div.innerHTML=`<span>${aluno.nome}</span><span>${aluno.pontos} pts</span>`;
-    rankingEl.appendChild(div);
-  });
-}
-
-/* ====== LOGIN ====== */
-const loginCodigo = document.getElementById("loginCodigo");
-const loginSenha = document.getElementById("loginSenha");
-const loginMsg = document.getElementById("loginMsg");
-const btnLogin = document.getElementById("btnLogin");
-
-btnLogin.addEventListener("click",()=>{
-  const codigo = loginCodigo.value.trim();
-  const senha = loginSenha.value.trim();
-  if(!codigo || !senha){ loginMsg.textContent="Digite código e senha"; return; }
-  // Busca usuário no Firestore
-  db.collection("usuarios").where("codigo","==",codigo).get().then(snapshot=>{
-    if(snapshot.empty){ loginMsg.textContent="Código ou senha incorretos"; return; }
-    snapshot.forEach(doc=>{
-      const data = doc.data();
-      if(data.senha !== senha){ loginMsg.textContent="Código ou senha incorretos"; return; }
-      loginMsg.textContent="";
-      alert(`Bem-vindo(a) ${data.nome}!`);
-      // Mostra PDF botão se for professor
-      if(data.tipo==="professor") btnPDF.style.display="inline-block";
-      // Renderiza Missões e Ranking
-      db.collection("usuarios").get().then(all=>{
-        const alunos=[];
-        all.forEach(d=>{
-          const u = d.data();
-          if(u.tipo==="aluno") alunos.push(u);
-        });
-        renderRanking(alunos);
-        renderMissoes(alunos);
-      });
+      aluno.pontos += pontos;
+      // Medalha visual
+      const medalha = document.createElement("div");
+      medalha.classList.add("medalha");
+      medalha.textContent = "🏅";
+      missao.appendChild(medalha);
+      setTimeout(()=> missao.removeChild(medalha),1000);
+      alert(`${aluno.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
+      renderRanking();
     });
   });
-});
-
-/* ====== BOTÃO PDF ====== */
-btnPDF.addEventListener("click",()=>{
-  alert("PDF gerado com os resultados das avaliações!");
-});
+}
 </script>
 
 </body>
