@@ -84,45 +84,38 @@ section { padding:60px 20px; }
 .rodape .social a:hover { color:#e6c200; }
 
 /* Protótipo Plataforma Interna */
-.plataforma { background:#f5f5f5; }
+.plataforma { background:#f5f5f5; padding-bottom:60px; }
 .plataforma h2 { margin-bottom:30px; text-align:center; }
+
+/* Admin / Login Forms */
+.admin-form, .login-form, .painel-admin, .painel-professor, .painel-aluno {
+  max-width:600px;
+  margin:40px auto;
+  padding:20px;
+  border-radius:12px;
+  background:#FFD700;
+  color:#800000;
+  display:none;
+}
+.admin-form h2, .login-form h2, .painel-admin h2, .painel-professor h2, .painel-aluno h2 {
+  margin-bottom:20px; text-align:center;
+}
+.admin-form input, .login-form input, .painel-admin input, .painel-professor input { width:100%; margin-bottom:10px; padding:10px; border-radius:8px; border:1px solid #800000; }
+.admin-form button, .login-form button, .painel-admin button, .painel-professor button { margin-top:10px; }
+
+/* Cards internos do painel */
 .mural { display:flex; flex-direction:column; gap:20px; margin-bottom:40px; }
 .postagem { border:1px solid #800000; border-radius:10px; padding:15px; background:#FFD700; }
 .missoes { display:flex; flex-wrap:wrap; gap:15px; margin-bottom:30px; justify-content:center; }
 .missao { background:#800000; color:#FFD700; padding:15px; border-radius:10px; flex:1 1 180px; text-align:center; cursor:pointer; transition:0.3s; position:relative; }
 .missao:hover { transform:translateY(-3px); }
-
-/* Medalhas */
-.missao .medalha {
-  position:absolute;
-  top:-10px;
-  right:-10px;
-  background:#FFD700;
-  color:#800000;
-  font-weight:bold;
-  border-radius:50%;
-  width:30px;
-  height:30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  animation: pulse 0.6s ease;
-}
-@keyframes pulse {
-  0% { transform: scale(0.5); opacity:0; }
-  50% { transform: scale(1.2); opacity:1; }
-  100% { transform: scale(1); opacity:1; }
-}
+.missao .medalha { position:absolute; top:-10px; right:-10px; background:#FFD700; color:#800000; font-weight:bold; border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; animation: pulse 0.6s ease; }
+@keyframes pulse { 0% { transform: scale(0.5); opacity:0; } 50% { transform: scale(1.2); opacity:1; } 100% { transform: scale(1); opacity:1; } }
 
 .ranking { display:flex; flex-direction:column; gap:10px; max-width:500px; margin:0 auto; }
 .aluno { padding:10px; border-radius:8px; background:#f9f9f9; display:flex; justify-content:space-between; transition:0.4s; }
 .aluno.destaque { background:#FFD700; font-weight:bold; }
 .aluno.superacao { background:#e6c200; font-weight:bold; }
-
-/* Form Admin */
-.admin-form { display:flex; flex-direction:column; gap:15px; max-width:400px; margin:40px auto; padding:20px; border:2px solid #800000; border-radius:12px; background:#FFD700; color:#800000; }
-.admin-form input { padding:10px; border-radius:8px; border:1px solid #800000; }
-.admin-form button { margin-top:10px; }
 
 /* Responsivo */
 @media(max-width:768px){
@@ -181,7 +174,7 @@ section { padding:60px 20px; }
 
 <section class="sobre-fundadora container">
 <div class="col">
-<img src="fundadora .png" alt="Foto da fundadora">
+<img src="fundadora.png" alt="Foto da fundadora">
 </div>
 <div class="col">
 <h2>Sobre a Fundadora</h2>
@@ -202,33 +195,60 @@ section { padding:60px 20px; }
 </div>
 </section>
 
-<!-- Tela cadastro Admin -->
-<section class="admin-form" id="adminForm" style="display:none;">
-<h2>Cadastro do Admin</h2>
+<!-- Seção cadastro Admin (aparece apenas se nenhum admin existir) -->
+<section class="admin-form" id="adminForm">
+<h2>Cadastre o Admin</h2>
 <input type="text" id="adminNome" placeholder="Nome completo" required>
-<input type="text" id="adminCodigo" placeholder="Código (ex: ADM001)" required>
+<input type="email" id="adminEmail" placeholder="Email" required>
 <input type="password" id="adminSenha" placeholder="Senha" required>
 <button id="btnCriarAdmin">Criar Admin</button>
 </section>
 
-<!-- Protótipo funcional da plataforma interna -->
-<section class="plataforma container" id="plataforma" style="display:none;">
-<h2>🖥️ Protótipo Plataforma Interna</h2>
+<!-- Seção login -->
+<section class="login-form" id="loginForm">
+<h2>Login</h2>
+<input type="email" id="loginEmail" placeholder="Email" required>
+<input type="password" id="loginSenha" placeholder="Senha" required>
+<button id="btnLogin">Entrar</button>
+</section>
 
-<h3>Mural Digital</h3>
-<div class="mural" id="mural"></div>
+<!-- Painel Admin -->
+<section class="painel-admin" id="painelAdmin">
+<h2>Painel Geral (Admin)</h2>
 
-<h3>Missões Semanais</h3>
-<div class="missoes" id="missoes">
-  <div class="missao" data-pontos="10">🧠 Conhecimento</div>
-  <div class="missao" data-pontos="15">🎨 Criativo</div>
-  <div class="missao" data-pontos="10">📖 Leitura</div>
-  <div class="missao" data-pontos="5">🌱 Cidadania</div>
-  <div class="missao" data-pontos="20">📸 Prática</div>
-</div>
+<h3>Cadastrar Professores</h3>
+<input type="text" id="nomeProf" placeholder="Nome do professor">
+<input type="email" id="emailProf" placeholder="Email do professor">
+<input type="password" id="senhaProf" placeholder="Senha">
+<button id="btnCadastrarProf">Cadastrar Professor</button>
+
+<h3>Cadastrar Alunos</h3>
+<input type="text" id="nomeAluno" placeholder="Nome do aluno">
+<input type="email" id="emailAluno" placeholder="Email do aluno">
+<input type="password" id="senhaAluno" placeholder="Senha">
+<button id="btnCadastrarAluno">Cadastrar Aluno</button>
 
 <h3>Ranking de Alunos</h3>
-<div class="ranking" id="ranking"></div>
+<div class="ranking" id="rankingAdmin"></div>
+</section>
+
+<!-- Painel Professor -->
+<section class="painel-professor" id="painelProfessor">
+<h2>Painel Professor</h2>
+<h3>Cadastrar Disciplina</h3>
+<input type="text" id="nomeDisciplina" placeholder="Nome da disciplina">
+<button id="btnCadastrarDisciplina">Cadastrar Disciplina</button>
+
+<h3>Suas Disciplinas</h3>
+<div id="disciplinasProfessor"></div>
+</section>
+
+<!-- Painel Aluno -->
+<section class="painel-aluno" id="painelAluno">
+<h2>Painel Aluno</h2>
+<div class="mural" id="muralAluno"></div>
+<div class="missoes" id="missoesAluno"></div>
+<div class="ranking" id="rankingAluno"></div>
 </section>
 
 <!-- Rodapé -->
@@ -246,7 +266,8 @@ section { padding:60px 20px; }
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script>
-// 🔹 COLOQUE SUA CONFIGURAÇÃO DO FIREBASE AQUI
+document.addEventListener("DOMContentLoaded", ()=>{
+
 const firebaseConfig = {
   apiKey: "SEU_API_KEY",
   authDomain: "SEU_AUTH_DOMAIN",
@@ -258,95 +279,78 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Verifica se já existe Admin cadastrado
+let usuarioAtual = null;
+
+// Verifica se existe Admin
 db.collection("usuarios").where("tipo","==","admin").get().then(snapshot=>{
   if(snapshot.empty){
     document.getElementById("adminForm").style.display="block";
   } else {
-    document.getElementById("plataforma").style.display="block";
-    carregarDados();
+    document.getElementById("loginForm").style.display="block";
   }
 });
 
 // Criar Admin
-document.getElementById("btnCriarAdmin").addEventListener("click",()=>{
+document.getElementById("btnCriarAdmin").addEventListener("click", ()=>{
   const nome = document.getElementById("adminNome").value;
-  const codigo = document.getElementById("adminCodigo").value;
+  const email = document.getElementById("adminEmail").value;
   const senha = document.getElementById("adminSenha").value;
-  if(nome && codigo && senha){
-    db.collection("usuarios").add({
-      nome, codigo, senha, tipo:"admin", pontos:0, destaque:false
-    }).then(()=>{
-      alert("Admin criado com sucesso!");
+  if(nome && email && senha){
+    db.collection("usuarios").add({nome,email,senha,tipo:"admin"}).then(()=>{
+      alert("Admin criado!");
       document.getElementById("adminForm").style.display="none";
-      document.getElementById("plataforma").style.display="block";
-      carregarDados();
+      mostrarPainelAdmin({nome,email});
     });
   } else alert("Preencha todos os campos!");
 });
 
-// Funções de renderização da plataforma
-function carregarDados(){
-  // Dados simulados
-  const alunos = [
-    { nome:"Ana", pontos:50 },
-    { nome:"Bruno", pontos:40 },
-    { nome:"Carla", pontos:30 },
-    { nome:"Daniel", pontos:20 },
-    { nome:"Eva", pontos:10 }
-  ];
+// Login
+document.getElementById("btnLogin").addEventListener("click", ()=>{
+  const email = document.getElementById("loginEmail").value;
+  const senha = document.getElementById("loginSenha").value;
+  db.collection("usuarios").where("email","==",email).where("senha","==",senha).get().then(snapshot=>{
+    if(snapshot.empty){
+      alert("Usuário ou senha incorretos");
+    } else {
+      snapshot.forEach(doc=>{
+        usuarioAtual = {id: doc.id, ...doc.data()};
+        document.getElementById("loginForm").style.display="none";
+        if(usuarioAtual.tipo==="admin") mostrarPainelAdmin(usuarioAtual);
+        else if(usuarioAtual.tipo==="professor") mostrarPainelProfessor(usuarioAtual);
+        else mostrarPainelAluno(usuarioAtual);
+      });
+    }
+  });
+});
 
-  const muralData = [
-    { titulo:"Comunicado da Escola", conteudo:"Aula de artes nesta quinta-feira será ao ar livre." },
-    { titulo:"Projeto Cultural", conteudo:"Exposição de desenhos dos alunos da turma 4º ano." },
-    { titulo:"Evento", conteudo:"Feira de Ciências será na próxima semana." }
-  ];
+// Funções de exibir painéis
+function mostrarPainelAdmin(admin){
+  document.getElementById("painelAdmin").style.display="block";
+  carregarRanking("rankingAdmin");
 
-  // Renderiza mural
-  const mural = document.getElementById("mural");
-  mural.innerHTML="";
-  muralData.forEach(post => {
-    const div = document.createElement("div");
-    div.classList.add("postagem");
-    div.innerHTML = `<h3>${post.titulo}</h3><p>${post.conteudo}</p>`;
-    mural.appendChild(div);
+  // Cadastrar Professor
+  document.getElementById("btnCadastrarProf").addEventListener("click", ()=>{
+    const nome = document.getElementById("nomeProf").value;
+    const email = document.getElementById("emailProf").value;
+    const senha = document.getElementById("senhaProf").value;
+    if(nome && email && senha){
+      db.collection("usuarios").add({nome,email,senha,tipo:"professor",disciplinas:[]}).then(()=>{
+        alert("Professor cadastrado!");
+        document.getElementById("nomeProf").value="";
+        document.getElementById("emailProf").value="";
+        document.getElementById("senhaProf").value="";
+      });
+    } else alert("Preencha todos os campos!");
   });
 
-  // Renderiza ranking
-  const rankingEl = document.getElementById("ranking");
-  function renderRanking(){
-    rankingEl.innerHTML = "";
-    alunos.sort((a,b)=>b.pontos-a.pontos);
-    alunos.forEach((aluno,index)=>{
-      const div = document.createElement("div");
-      div.classList.add("aluno");
-      if(index===0) div.classList.add("destaque");
-      if(aluno.pontos<=10) div.classList.add("superacao");
-      div.innerHTML = `<span>${aluno.nome}</span><span>${aluno.pontos} pts</span>`;
-      rankingEl.appendChild(div);
-    });
-  }
-  renderRanking();
-
-  // Missões interativas com medalhas
-  const missoes = document.querySelectorAll(".missao");
-  missoes.forEach(missao=>{
-    missao.addEventListener("click",()=>{
-      const pontos = parseInt(missao.dataset.pontos);
-      const aluno = alunos[Math.floor(Math.random()*alunos.length)];
-      aluno.pontos += pontos;
-      // Medalha visual
-      const medalha = document.createElement("div");
-      medalha.classList.add("medalha");
-      medalha.textContent = "🏅";
-      missao.appendChild(medalha);
-      setTimeout(()=> missao.removeChild(medalha),1000);
-      alert(`${aluno.nome} completou a missão "${missao.textContent}" e ganhou ${pontos} pontos!`);
-      renderRanking();
-    });
-  });
-}
-</script>
-
-</body>
-</html>
+  // Cadastrar Aluno
+  document.getElementById("btnCadastrarAluno").addEventListener("click", ()=>{
+    const nome = document.getElementById("nomeAluno").value;
+    const email = document.getElementById("emailAluno").value;
+    const senha = document.getElementById("senhaAluno").value;
+    if(nome && email && senha){
+      db.collection("usuarios").add({nome,email,senha,tipo:"aluno",pontos:0}).then(()=>{
+        alert("Aluno cadastrado!");
+        document.getElementById("nomeAluno").value="";
+        document.getElementById("emailAluno").value="";
+        document.getElementBy
