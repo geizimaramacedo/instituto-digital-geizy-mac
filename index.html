@@ -23,15 +23,16 @@
 </script>
 <link rel="stylesheet" href="style.css">
 <style>
-/* Layout básico visual */
-body { font-family: Arial, sans-serif; margin:0; padding:0; background-color:#f7f7f7; }
-header, section { padding:20px; }
-header { background-color:#4a90e2; color:white; text-align:center; }
+/* Mantendo o estilo visual original */
+body { font-family: 'Arial', sans-serif; margin:0; padding:0; background-color:#f0f4f8; color:#333; }
+header { background-color:#4a90e2; color:white; text-align:center; padding:40px 20px; }
 h1,h2,h3 { margin:10px 0; }
-button { padding:8px 12px; margin:5px 0; cursor:pointer; }
-form { margin:10px 0; }
-input, select { margin:5px 0; padding:5px; width:200px; }
+section { padding:20px; max-width:900px; margin:0 auto; }
+img { max-width:100%; border-radius:8px; }
+button { padding:10px 15px; margin:5px 0; cursor:pointer; background-color:#4a90e2; color:white; border:none; border-radius:4px; }
+input, select { margin:5px 0; padding:8px; width:100%; max-width:300px; }
 #plataforma { display:none; }
+#ranking, #destaques, #mural, #missoes { margin-top:20px; background-color:white; padding:15px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
 </style>
 </head>
 <body>
@@ -42,19 +43,21 @@ input, select { margin:5px 0; padding:5px; width:200px; }
   <p>Aprender, criar e se conectar com a educação digital</p>
 </header>
 
-<!-- Seções Visuais -->
+<!-- Hero visual -->
 <section id="hero">
-  <img src="hero-image.png" alt="Hero Image" style="width:100%; max-width:800px;">
+  <img src="hero-image.png" alt="Hero Image">
   <h2>Nosso Projeto Educacional</h2>
   <p>Integração de tecnologia, arte e cidadania para a comunidade.</p>
 </section>
 
+<!-- Fundadora -->
 <section id="fundadora">
-  <img src="fundadora .png" alt="Geizy Macedo" style="width:200px;">
+  <img src="fundadora .png" alt="Geizy Macedo">
   <h2>Sobre a Fundadora</h2>
-  <p>Geizy Macedo é educadora e líder do Instituto Digital, comprometida com a educação inovadora.</p>
+  <p>Geizy Macedo é educadora e líder do Instituto Digital, comprometida com metodologias inovadoras e educação humanizada.</p>
 </section>
 
+<!-- Newsletter -->
 <section id="newsletter">
   <h2>Receba novidades</h2>
   <input type="text" placeholder="Seu e-mail"><button>Inscrever-se</button>
@@ -124,109 +127,72 @@ input, select { margin:5px 0; padding:5px; width:200px; }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// Admin pré-cadastrado
-const usuarios = [
-  { tipo: "admin", nome: "Geizy Macedo", codigo: "ADM001", senha: "1234", pontos: 0, destaque: false }
-];
+const usuarios = [{ tipo: "admin", nome: "Geizy Macedo", codigo: "ADM001", senha: "1234", pontos: 0, destaque: false }];
 
-// Toggle campos de cadastro
 document.getElementById('tipoUsuario').addEventListener('change', function() {
-  if(this.value === 'aluno') {
-    document.getElementById('campoTurma').style.display='block';
-    document.getElementById('campoDisciplina').style.display='none';
-  } else {
-    document.getElementById('campoTurma').style.display='none';
-    document.getElementById('campoDisciplina').style.display='block';
-  }
+  if(this.value==='aluno'){ document.getElementById('campoTurma').style.display='block'; document.getElementById('campoDisciplina').style.display='none'; }
+  else{ document.getElementById('campoTurma').style.display='none'; document.getElementById('campoDisciplina').style.display='block'; }
 });
 
-// Cadastro
 document.getElementById('formCadastro').addEventListener('submit', async function(e){
   e.preventDefault();
-  const tipo = document.getElementById('tipoUsuario').value;
-  const codigo = document.getElementById('codigo').value;
-  const nome = document.getElementById('nome').value;
-  const senha = document.getElementById('senha').value;
-  const turma = tipo==='aluno'?document.getElementById('turma').value:'';
-  const disciplina = tipo==='professor'?document.getElementById('disciplina').value:'';
-
-  try {
-    const emailFake = codigo + '@institutodigital.com';
-    await auth.createUserWithEmailAndPassword(emailFake, senha);
-    await db.collection('usuarios').doc(codigo).set({ nome, codigo, senha, tipo, turma, disciplina, pontos:0, destaque:false });
+  const tipo=document.getElementById('tipoUsuario').value;
+  const codigo=document.getElementById('codigo').value;
+  const nome=document.getElementById('nome').value;
+  const senha=document.getElementById('senha').value;
+  const turma=tipo==='aluno'?document.getElementById('turma').value:'';
+  const disciplina=tipo==='professor'?document.getElementById('disciplina').value:'';
+  try{
+    const emailFake=codigo+'@institutodigital.com';
+    await auth.createUserWithEmailAndPassword(emailFake,senha);
+    await db.collection('usuarios').doc(codigo).set({ nome,codigo,senha,tipo,turma,disciplina,pontos:0,destaque:false });
     document.getElementById('msgCadastro').innerText='Cadastro realizado com sucesso!';
     this.reset();
-  } catch(err){
-    document.getElementById('msgCadastro').innerText='Erro: '+err.message;
-  }
+  } catch(err){ document.getElementById('msgCadastro').innerText='Erro: '+err.message; }
 });
 
-// Login
 document.getElementById('formLogin').addEventListener('submit', async function(e){
   e.preventDefault();
-  const codigo = document.getElementById('loginCodigo').value;
-  const senha = document.getElementById('loginSenha').value;
-  try {
-    const emailFake = codigo + '@institutodigital.com';
-    await auth.signInWithEmailAndPassword(emailFake, senha);
-    const doc = await db.collection('usuarios').doc(codigo).get();
+  const codigo=document.getElementById('loginCodigo').value;
+  const senha=document.getElementById('loginSenha').value;
+  try{
+    const emailFake=codigo+'@institutodigital.com';
+    await auth.signInWithEmailAndPassword(emailFake,senha);
+    const doc=await db.collection('usuarios').doc(codigo).get();
     if(doc.exists){
-      const usuario = doc.data();
-      document.getElementById('nomeUsuario').innerText = usuario.nome;
+      const usuario=doc.data();
+      document.getElementById('nomeUsuario').innerText=usuario.nome;
       document.getElementById('login').style.display='none';
       document.getElementById('cadastro').style.display='none';
       document.getElementById('plataforma').style.display='block';
       carregarPlataforma(usuario);
     }
-  } catch(err){
-    document.getElementById('msgLogin').innerText='Código ou senha incorretos';
-  }
+  } catch(err){ document.getElementById('msgLogin').innerText='Código ou senha incorretos'; }
 });
 
 async function carregarPlataforma(usuario){
-  const snapshot = await db.collection('usuarios').get();
+  const snapshot=await db.collection('usuarios').get();
   let rankingHTML='<h3>Ranking</h3><ol>';
-  snapshot.forEach(doc=>{
-    const u=doc.data();
-    rankingHTML+=`<li>${u.nome} - ${u.pontos} pontos</li>`;
-  });
-  rankingHTML+='</ol>';
-  document.getElementById('ranking').innerHTML=rankingHTML;
+  snapshot.forEach(doc=>{ const u=doc.data(); rankingHTML+=`<li>${u.nome} - ${u.pontos} pontos</li>`; });
+  rankingHTML+='</ol>'; document.getElementById('ranking').innerHTML=rankingHTML;
 
-  let destaqueHTML='<h3>Destaques</h3>';
-  snapshot.forEach(doc=>{
-    const u=doc.data();
-    if(u.destaque) destaqueHTML+=`<p>${u.nome}</p>`;
-  });
+  let destaqueHTML='<h3>Destaques</h3>'; snapshot.forEach(doc=>{ const u=doc.data(); if(u.destaque) destaqueHTML+=`<p>${u.nome}</p>`; });
   document.getElementById('destaques').innerHTML=destaqueHTML;
 
-  const muralSnapshot = await db.collection('mural').get();
-  let muralHTML='<h3>Mural</h3>';
-  muralSnapshot.forEach(doc=>{
-    const p=doc.data();
-    muralHTML+=`<p><strong>${p.autor} (${p.turma}):</strong> ${p.texto}</p>`;
-  });
+  const muralSnapshot=await db.collection('mural').get();
+  let muralHTML='<h3>Mural</h3>'; muralSnapshot.forEach(doc=>{ const p=doc.data(); muralHTML+=`<p><strong>${p.autor} (${p.turma}):</strong> ${p.texto}</p>`; });
   document.getElementById('mural').innerHTML=muralHTML;
 
-  const missoesSnapshot = await db.collection('missoes').get();
-  let missoesHTML='<h3>Missões</h3><ul>';
-  missoesSnapshot.forEach(doc=>{
-    const m=doc.data();
-    missoesHTML+=`<li>${m.titulo} - ${m.pontos} pts</li>`;
-  });
-  missoesHTML+='</ul>';
-  document.getElementById('missoes').innerHTML=missoesHTML;
+  const missoesSnapshot=await db.collection('missoes').get();
+  let missoesHTML='<h3>Missões</h3><ul>'; missoesSnapshot.forEach(doc=>{ const m=doc.data(); missoesHTML+=`<li>${m.titulo} - ${m.pontos} pts</li>`; }); missoesHTML+='</ul>'; document.getElementById('missoes').innerHTML=missoesHTML;
 }
 
 document.getElementById('exportarPDF').addEventListener('click', async function(){
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+  const { jsPDF } = window.jspdf; const doc = new jsPDF();
   doc.text('Ranking e Missões',10,10);
-  const rankingText = document.getElementById('ranking').innerText;
-  const missoesText = document.getElementById('missoes').innerText;
-  doc.text(rankingText,10,20);
-  doc.text(missoesText,10,40);
-  doc.save('avaliacoes.pdf');
+  const rankingText=document.getElementById('ranking').innerText;
+  const missoesText=document.getElementById('missoes').innerText;
+  doc.text(rankingText,10,20); doc.text(missoesText,10,40); doc.save('avaliacoes.pdf');
 });
 </script>
 </body>
