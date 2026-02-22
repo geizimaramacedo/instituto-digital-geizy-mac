@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instituto Digital Geizy Mac - Plataforma Final</title>
+<title>Instituto Digital Geizy Mac - Plataforma com Cadastro</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
@@ -24,9 +24,8 @@ button:hover,a:hover{background:#e6c200;}
 .missoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
 .missao{background:#800000;color:#FFD700;flex:1 1 180px;text-align:center;cursor:pointer;transition:0.3s;}
 .missao:hover{transform:translateY(-3px);}
-.login-box{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.2);max-width:400px;margin:40px auto;}
-.login-box h2{text-align:center;margin-bottom:20px;}
-#plataforma{display:none;}
+.login-box, .cadastro-box{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.2);max-width:400px;margin:40px auto;}
+.login-box h2, .cadastro-box h2{text-align:center;margin-bottom:20px;}
 .disciplinas-box{margin-bottom:20px;}
 .avaliacoes-box{margin-top:20px;}
 </style>
@@ -78,6 +77,29 @@ button:hover,a:hover{background:#e6c200;}
 <input type="password" id="senhaLogin" placeholder="Senha">
 <button onclick="fazerLogin()">Entrar</button>
 <p id="loginErro" style="color:red;text-align:center;"></p>
+<button onclick="mostrarCadastro()">Cadastrar novo usuário</button>
+</div>
+
+<!-- CADASTRO -->
+<div class="cadastro-box" id="cadastroBox" style="display:none;">
+<h2>Cadastro de Usuário</h2>
+<select id="tipoUsuario">
+<option value="aluno">Aluno</option>
+<option value="professor">Professor</option>
+</select>
+<input type="text" id="nomeUsuario" placeholder="Nome">
+<input type="text" id="codigoUsuario" placeholder="Código (ex: AL005)">
+<input type="password" id="senhaUsuario" placeholder="Senha">
+<select id="turmaUsuario">
+<option>6º Ano</option>
+<option>7º Ano</option>
+<option>8º Ano</option>
+<option>9º Ano</option>
+</select>
+<input type="text" id="disciplinasUsuario" placeholder="Disciplinas (para professor, separadas por ,)">
+<button onclick="cadastrarUsuario()">Cadastrar</button>
+<button onclick="fecharCadastro()">Cancelar</button>
+<p id="cadastroMsg" style="color:green;text-align:center;"></p>
 </div>
 
 <!-- PLATAFORMA INTERNA -->
@@ -124,7 +146,7 @@ button:hover,a:hover{background:#e6c200;}
 
 <script>
 // --- DADOS SIMULADOS ---
-const usuarios = [
+let usuarios = [
   { tipo:"admin", nome:"Geizy", codigo:"ADM001", senha:"1234" },
   { tipo:"professor", nome:"Prof. João", codigo:"PF001", senha:"1234", disciplinas:["Matemática"], turmas:["6º Ano","7º Ano"] },
   { tipo:"aluno", nome:"Alice", codigo:"AL001", senha:"1234", turma:"6º Ano", pontos:20, medalhas:1 },
@@ -142,7 +164,7 @@ const missoesData = [
   { icone:"📸", titulo:"Prática", pontos:20 }
 ];
 
-// --- FUNÇÕES ---
+// --- LOGIN ---
 function fazerLogin(){
   const codigo = document.getElementById("codigoLogin").value;
   const senha = document.getElementById("senhaLogin").value;
@@ -150,11 +172,43 @@ function fazerLogin(){
   const loginErro = document.getElementById("loginErro");
   if(!user){ loginErro.textContent="Código ou senha incorretos"; return;}
   document.getElementById("loginBox").style.display="none";
+  document.getElementById("cadastroBox").style.display="none";
   document.getElementById("plataforma").style.display="block";
   loginErro.textContent="";
   inicializarPlataforma(user);
 }
 
+// --- CADASTRO ---
+function mostrarCadastro(){
+  document.getElementById("cadastroBox").style.display="block";
+  document.getElementById("loginBox").style.display="none";
+}
+function fecharCadastro(){
+  document.getElementById("cadastroBox").style.display="none";
+  document.getElementById("loginBox").style.display="block";
+}
+function cadastrarUsuario(){
+  const tipo=document.getElementById("tipoUsuario").value;
+  const nome=document.getElementById("nomeUsuario").value;
+  const codigo=document.getElementById("codigoUsuario").value;
+  const senha=document.getElementById("senhaUsuario").value;
+  const turma=document.getElementById("turmaUsuario").value;
+  const disciplinas=document.getElementById("disciplinasUsuario").value.split(",").map(d=>d.trim()).filter(d=>d);
+  if(!nome||!codigo||!senha){ alert("Preencha todos os campos"); return; }
+  const existe = usuarios.some(u=>u.codigo===codigo);
+  if(existe){ alert("Código já existe!"); return; }
+  const novoUsuario={tipo,nome,codigo,senha};
+  if(tipo==="aluno"){ novoUsuario.turma=turma; novoUsuario.pontos=0; novoUsuario.medalhas=0; }
+  if(tipo==="professor"){ novoUsuario.disciplinas=disciplinas; novoUsuario.turmas=[turma]; }
+  usuarios.push(novoUsuario);
+  document.getElementById("cadastroMsg").textContent=`Usuário ${nome} cadastrado com sucesso!`;
+  document.getElementById("nomeUsuario").value="";
+  document.getElementById("codigoUsuario").value="";
+  document.getElementById("senhaUsuario").value="";
+  document.getElementById("disciplinasUsuario").value="";
+}
+
+// --- PLATAFORMA ---
 function inicializarPlataforma(user){
   renderRanking();
   atualizarDestaques();
@@ -183,6 +237,7 @@ function renderRanking(){
 
 function atualizarDestaques(){
   const alunos = usuarios.filter(u=>u.tipo==="aluno");
+  if(alunos.length===0) return;
   const destaque = alunos.reduce((a,b)=>a.pontos>b.pontos?a:b);
   document.getElementById("alunoDestaque").textContent = `${destaque.nome} - ${destaque.pontos} pts`;
   const superacao = alunos.reduce((a,b)=>a.pontos<b.pontos?a:b);
