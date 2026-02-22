@@ -21,18 +21,43 @@
   const auth = firebase.auth();
   const db = firebase.firestore();
 </script>
+<link rel="stylesheet" href="style.css">
 <style>
-/* Adicione aqui seu CSS já aprovado */
-body { font-family: Arial, sans-serif; margin:0; padding:0; }
-section { padding: 20px; }
+/* Layout básico visual */
+body { font-family: Arial, sans-serif; margin:0; padding:0; background-color:#f7f7f7; }
+header, section { padding:20px; }
+header { background-color:#4a90e2; color:white; text-align:center; }
+h1,h2,h3 { margin:10px 0; }
+button { padding:8px 12px; margin:5px 0; cursor:pointer; }
+form { margin:10px 0; }
+input, select { margin:5px 0; padding:5px; width:200px; }
+#plataforma { display:none; }
 </style>
 </head>
 <body>
 
-<!-- Hero e Projeto Educacional -->
+<!-- Header Hero -->
+<header>
+  <h1>Instituto Digital Geizy Macedo</h1>
+  <p>Aprender, criar e se conectar com a educação digital</p>
+</header>
+
+<!-- Seções Visuais -->
 <section id="hero">
-  <h1>Aprender, criar e se conectar com a educação digital</h1>
-  <p>Escola digital com raízes na comunidade e metodologia inovadora</p>
+  <img src="hero-image.png" alt="Hero Image" style="width:100%; max-width:800px;">
+  <h2>Nosso Projeto Educacional</h2>
+  <p>Integração de tecnologia, arte e cidadania para a comunidade.</p>
+</section>
+
+<section id="fundadora">
+  <img src="fundadora .png" alt="Geizy Macedo" style="width:200px;">
+  <h2>Sobre a Fundadora</h2>
+  <p>Geizy Macedo é educadora e líder do Instituto Digital, comprometida com a educação inovadora.</p>
+</section>
+
+<section id="newsletter">
+  <h2>Receba novidades</h2>
+  <input type="text" placeholder="Seu e-mail"><button>Inscrever-se</button>
 </section>
 
 <!-- Cadastro -->
@@ -78,7 +103,7 @@ section { padding: 20px; }
 <section id="login">
 <h2>Login</h2>
 <form id="formLogin">
-  <label>Código ou Email:</label>
+  <label>Código:</label>
   <input type="text" id="loginCodigo" required><br>
   <label>Senha:</label>
   <input type="password" id="loginSenha" required><br>
@@ -88,7 +113,7 @@ section { padding: 20px; }
 </section>
 
 <!-- Plataforma Interna -->
-<section id="plataforma" style="display:none;">
+<section id="plataforma">
 <h2>Bem-vindo, <span id="nomeUsuario"></span></h2>
 <div id="ranking"></div>
 <div id="destaques"></div>
@@ -97,6 +122,7 @@ section { padding: 20px; }
 <button id="exportarPDF">Exportar Avaliações em PDF</button>
 </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 // Admin pré-cadastrado
 const usuarios = [
@@ -125,13 +151,9 @@ document.getElementById('formCadastro').addEventListener('submit', async functio
   const disciplina = tipo==='professor'?document.getElementById('disciplina').value:'';
 
   try {
-    // Criar usuário no Firebase Auth
     const emailFake = codigo + '@institutodigital.com';
     await auth.createUserWithEmailAndPassword(emailFake, senha);
-
-    // Salvar no Firestore
     await db.collection('usuarios').doc(codigo).set({ nome, codigo, senha, tipo, turma, disciplina, pontos:0, destaque:false });
-
     document.getElementById('msgCadastro').innerText='Cadastro realizado com sucesso!';
     this.reset();
   } catch(err){
@@ -144,12 +166,9 @@ document.getElementById('formLogin').addEventListener('submit', async function(e
   e.preventDefault();
   const codigo = document.getElementById('loginCodigo').value;
   const senha = document.getElementById('loginSenha').value;
-
   try {
     const emailFake = codigo + '@institutodigital.com';
     await auth.signInWithEmailAndPassword(emailFake, senha);
-
-    // Buscar dados do Firestore
     const doc = await db.collection('usuarios').doc(codigo).get();
     if(doc.exists){
       const usuario = doc.data();
@@ -164,9 +183,7 @@ document.getElementById('formLogin').addEventListener('submit', async function(e
   }
 });
 
-// Função para carregar plataforma
 async function carregarPlataforma(usuario){
-  // Ranking
   const snapshot = await db.collection('usuarios').get();
   let rankingHTML='<h3>Ranking</h3><ol>';
   snapshot.forEach(doc=>{
@@ -176,7 +193,6 @@ async function carregarPlataforma(usuario){
   rankingHTML+='</ol>';
   document.getElementById('ranking').innerHTML=rankingHTML;
 
-  // Destaques
   let destaqueHTML='<h3>Destaques</h3>';
   snapshot.forEach(doc=>{
     const u=doc.data();
@@ -184,7 +200,6 @@ async function carregarPlataforma(usuario){
   });
   document.getElementById('destaques').innerHTML=destaqueHTML;
 
-  // Mural
   const muralSnapshot = await db.collection('mural').get();
   let muralHTML='<h3>Mural</h3>';
   muralSnapshot.forEach(doc=>{
@@ -193,7 +208,6 @@ async function carregarPlataforma(usuario){
   });
   document.getElementById('mural').innerHTML=muralHTML;
 
-  // Missões
   const missoesSnapshot = await db.collection('missoes').get();
   let missoesHTML='<h3>Missões</h3><ul>';
   missoesSnapshot.forEach(doc=>{
@@ -204,7 +218,6 @@ async function carregarPlataforma(usuario){
   document.getElementById('missoes').innerHTML=missoesHTML;
 }
 
-// Exportar PDF (simples, com jsPDF)
 document.getElementById('exportarPDF').addEventListener('click', async function(){
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
@@ -216,6 +229,5 @@ document.getElementById('exportarPDF').addEventListener('click', async function(
   doc.save('avaliacoes.pdf');
 });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
